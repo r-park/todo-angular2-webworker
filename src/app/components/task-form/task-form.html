@@ -1,0 +1,7 @@
+<form [ng-form-model]="form" (submit)="submit()" novalidate>
+  <input
+    (keyup.escape)="cancel()"
+    ng-control="title"
+    placeholder="What needs to be done?"
+    type="text">
+</form>

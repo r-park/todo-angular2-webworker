@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  <title>Todo Angular 2</title>
+
+  <link rel="stylesheet" href="">
+</head>
+
+
+<body>
+  <app></app>
+
+
+  <script src="lib/Reflect.js"></script>
+  <script src="lib/zone.min.js"></script>
+  <script src="lib/es6-module-loader.js"></script>
+  <script src="lib/system.js"></script>
+  <script src="lib/helpers.js"></script>
+  <script>
+    System.config({
+      baseURL: './',
+      defaultJSExtensions: true,
+      map: {
+        rx: 'lib/rx.min.js'
+      },
+      paths: {
+        'angular2/*': 'lib/angular2/*'
+      }
+    });
+
+    System.import('app/app').catch(function(error){
+      console.log(error);
+    });
+  </script>
+</body>
+</html>
