@@ -75,7 +75,7 @@ var config = {
 
   tslint: {
     report: {
-      options: {emitError: false},
+      options: {emitError: true},
       type: 'verbose'
     }
   }
@@ -186,17 +186,6 @@ gulp.task('karma.run', function(done){
 });
 
 
-gulp.task('test', gulp.series('lint', 'karma'));
-
-
-gulp.task('test.single', gulp.series('lint', 'karma.single'));
-
-
-gulp.task('test.watch', gulp.series('lint', function(){
-  gulp.watch(paths.src.ts, gulp.series('ts', 'karma.run'));
-}));
-
-
 gulp.task('build', gulp.series(
   'clean.target',
   'copy.angular',
@@ -206,6 +195,17 @@ gulp.task('build', gulp.series(
   'copy.lib',
   'ts'
 ));
+
+
+gulp.task('test', gulp.series('lint', 'build', 'karma'));
+
+
+gulp.task('test.single', gulp.series('lint', 'build', 'karma.single'));
+
+
+gulp.task('test.watch', function(){
+  gulp.watch(paths.src.ts, gulp.series('ts', 'karma.run'));
+});
 
 
 gulp.task('default', gulp.series('build', function watch(){
