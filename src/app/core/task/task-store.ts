@@ -1,6 +1,6 @@
 import { Injectable } from 'angular2/angular2';
-import { Json } from 'angular2/src/facade/lang';
-import { window } from 'angular2/src/facade/browser';
+import { Json } from 'angular2/src/core/facade/lang';
+import { window } from 'angular2/src/core/facade/browser';
 import { ITask, Task } from './task';
 
 
