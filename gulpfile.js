@@ -28,7 +28,7 @@ var paths = {
       'node_modules/rx/dist/rx.{min.js,map}',
       'node_modules/systemjs/dist/system.{js,js.map}',
       'node_modules/zone.js/dist/zone.min.js',
-      'src/lib/helpers.js'
+      'src/lib/*.js'
     ],
     target: 'target/lib'
   },
