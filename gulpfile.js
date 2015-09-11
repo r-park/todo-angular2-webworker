@@ -44,7 +44,8 @@ var paths = {
 
   typings: {
     entries: [
-      'typings/tsd.d.ts'
+      'typings/tsd/tsd.d.ts',
+      'typings/custom/custom.d.ts'
     ],
     watch: 'typings/**/*.ts'
   }
