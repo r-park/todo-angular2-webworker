@@ -14,7 +14,7 @@ import { TaskService } from 'app/core/task/task-service';
 
 @Component({
   properties: ['model'],
-  selector: 'task-list-item'
+  selector: 'task-item'
 })
 
 @View({
@@ -24,15 +24,15 @@ import { TaskService } from 'app/core/task/task-service';
     NgFormModel
   ],
   encapsulation,
-  styleUrls: ['app/components/task-list-item/task-list-item.css'],
-  templateUrl: 'app/components/task-list-item/task-list-item.html'
+  styleUrls: ['app/components/task-item/task-item.css'],
+  templateUrl: 'app/components/task-item/task-item.html'
 })
 
 
-export class TaskListItem {
+export class TaskItem {
   editing: boolean;
   form: ControlGroup;
-  private _model: ITask;
+  model: ITask;
   private taskService: TaskService;
 
   constructor(formBuilder: FormBuilder, taskService: TaskService) {
@@ -41,17 +41,13 @@ export class TaskListItem {
     this.taskService = taskService;
   }
 
-  get model(): ITask {
-    return this._model;
-  }
-
-  set model(model: ITask) {
-    this._model = model;
+  delete() {
+    this.taskService.deleteTask(this.model);
   }
 
   edit() {
     this.editing = true;
-    this.form.controls.title.updateValue(this._model.title);
+    this.form.controls.title.updateValue(this.model.title);
   }
 
   cancelEdit() {
@@ -61,20 +57,16 @@ export class TaskListItem {
   saveEdit() {
     if (this.editing) {
       const value: string = this.form.controls.title.value.trim();
-      if (value.length && value !== this._model.title) {
-        this._model.title = value;
-        this.taskService.updateTask(this._model);
+      if (value.length && value !== this.model.title) {
+        this.model.title = value;
+        this.taskService.updateTask(this.model);
       }
       this.editing = false;
     }
   }
 
-  remove() {
-    this.taskService.deleteTask(this._model);
-  }
-
   toggleStatus() {
-    this._model.completed = !this._model.completed;
-    this.taskService.updateTask(this._model);
+    this.model.completed = !this.model.completed;
+    this.taskService.updateTask(this.model);
   }
 }

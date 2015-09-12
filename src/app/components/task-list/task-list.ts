@@ -3,7 +3,7 @@ import { RouteParams } from 'angular2/router';
 import { encapsulation } from 'app/utils/view-encapsulation';
 import { ITask } from 'app/core/task/task';
 import { TaskService } from 'app/core/task/task-service';
-import { TaskListItem } from '../task-list-item/task-list-item';
+import { TaskItem } from '../task-item/task-item';
 
 
 @Component({
@@ -13,7 +13,7 @@ import { TaskListItem } from '../task-list-item/task-list-item';
 @View({
   directives: [
     NgFor,
-    TaskListItem
+    TaskItem
   ],
   encapsulation,
   styleUrls: ['app/components/task-list/task-list.css'],
