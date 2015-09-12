@@ -13,9 +13,6 @@ install:
 script:
   - npm test
 
-after_success:
-  - npm run coveralls
-
 notifications:
   email:
     on_failure: change
