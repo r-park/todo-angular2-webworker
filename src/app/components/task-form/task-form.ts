@@ -8,7 +8,7 @@ import {
   View
 } from 'angular2/angular2';
 import { encapsulation } from 'app/utils/view-encapsulation';
-import { TaskStore } from 'app/core/task/task-store';
+import { TaskService } from 'app/core/task/task-service';
 
 
 @Component({
@@ -29,21 +29,25 @@ import { TaskStore } from 'app/core/task/task-store';
 
 export class TaskForm {
   form: ControlGroup;
-  private store: TaskStore;
+  private taskService: TaskService;
 
-  constructor(formBuilder: FormBuilder, store: TaskStore) {
+  constructor(formBuilder: FormBuilder, taskService: TaskService) {
     this.form = formBuilder.group({title: ['']});
-    this.store = store;
+    this.taskService = taskService;
   }
 
-  cancel(): void {
+  cancel() {
+    this.clear();
+  }
+
+  clear() {
     this.form.controls.title.updateValue('');
   }
 
-  submit(): void {
+  submit() {
     if (this.form.valid) {
-      this.store.createTask(this.form.controls.title.value);
-      this.form.controls.title.updateValue('');
+      this.taskService.createTask(this.form.controls.title.value);
+      this.clear();
     }
   }
 }

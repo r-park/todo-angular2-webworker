@@ -14,6 +14,7 @@
     "reflect-metadata": "~0.1.1",
     "rx": "~3.1.2",
     "systemjs": "~0.18.17",
+    "todo-server": "r-park/todo-server.git",
     "zone.js": "~0.5.4"
   },
   "devDependencies": {

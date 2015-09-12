@@ -5,6 +5,7 @@ var assign      = require('object-assign'),
     gulp        = require('gulp'),
     karma       = require('karma'),
     sourcemaps  = require('gulp-sourcemaps'),
+    todoServer  = require('todo-server'),
     tslint      = require('gulp-tslint'),
     typescript  = require('gulp-typescript');
 
@@ -126,37 +127,6 @@ gulp.task('copy.lib', function(){
 });
 
 
-gulp.task('lint', function(){
-  return gulp
-    .src(paths.src.ts)
-    .pipe(tslint())
-    .pipe(tslint.report(
-      config.tslint.report.type,
-      config.tslint.report.options
-    ));
-});
-
-
-gulp.task('server', function(done){
-  browserSync
-    .create()
-    .init(config.browserSync, done);
-});
-
-
-var tsProject = typescript.createProject(config.ts.configFile);
-
-gulp.task('ts', function(){
-  return gulp
-    .src([paths.src.ts].concat(paths.typings.entries))
-    .pipe(sourcemaps.init())
-    .pipe(typescript(tsProject))
-    .js
-    .pipe(sourcemaps.write('.'))
-    .pipe(gulp.dest(paths.target));
-});
-
-
 function karmaServer(options, done) {
   var server = new karma.Server(options, function(error){
     if (error) process.exit(error);
@@ -184,6 +154,43 @@ gulp.task('karma.run', function(done){
     // Karma server will print all test failures.
     done();
   });
+});
+
+
+gulp.task('lint', function(){
+  return gulp
+    .src(paths.src.ts)
+    .pipe(tslint())
+    .pipe(tslint.report(
+      config.tslint.report.type,
+      config.tslint.report.options
+    ));
+});
+
+
+gulp.task('server', function(done){
+  browserSync
+    .create()
+    .init(config.browserSync, done);
+});
+
+
+gulp.task('server.api', function(done){
+  todoServer.start();
+  done();
+});
+
+
+var tsProject = typescript.createProject(config.ts.configFile);
+
+gulp.task('ts', function(){
+  return gulp
+    .src([paths.src.ts].concat(paths.typings.entries))
+    .pipe(sourcemaps.init())
+    .pipe(typescript(tsProject))
+    .js
+    .pipe(sourcemaps.write('.'))
+    .pipe(gulp.dest(paths.target));
 });
 
 

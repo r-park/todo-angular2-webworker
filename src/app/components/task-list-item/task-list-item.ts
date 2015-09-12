@@ -9,7 +9,7 @@ import {
 } from 'angular2/angular2';
 import { encapsulation } from 'app/utils/view-encapsulation';
 import { ITask } from 'app/core/task/task';
-import { TaskStore } from 'app/core/task/task-store';
+import { TaskService } from 'app/core/task/task-service';
 
 
 @Component({
@@ -33,12 +33,12 @@ export class TaskListItem {
   editing: boolean;
   form: ControlGroup;
   private _model: ITask;
-  private store: TaskStore;
+  private taskService: TaskService;
 
-  constructor(formBuilder: FormBuilder, store: TaskStore) {
+  constructor(formBuilder: FormBuilder, taskService: TaskService) {
     this.editing = false;
     this.form = formBuilder.group({title: ['']});
-    this.store = store;
+    this.taskService = taskService;
   }
 
   get model(): ITask {
@@ -49,32 +49,32 @@ export class TaskListItem {
     this._model = model;
   }
 
-  edit(): void {
+  edit() {
     this.editing = true;
     this.form.controls.title.updateValue(this._model.title);
   }
 
-  cancelEdit(): void {
+  cancelEdit() {
     this.editing = false;
   }
 
-  saveEdit(): void {
+  saveEdit() {
     if (this.editing) {
       const value: string = this.form.controls.title.value.trim();
       if (value.length && value !== this._model.title) {
         this._model.title = value;
-        this.store.updateTask(this._model);
+        this.taskService.updateTask(this._model);
       }
       this.editing = false;
     }
   }
 
-  remove(): void {
-    this.store.removeTask(this._model);
+  remove() {
+    this.taskService.deleteTask(this._model);
   }
 
-  toggleStatus(): void {
+  toggleStatus() {
     this._model.completed = !this._model.completed;
-    this.store.updateTask(this._model);
+    this.taskService.updateTask(this._model);
   }
 }
