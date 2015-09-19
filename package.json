@@ -18,9 +18,12 @@
     "zone.js": "~0.5.4"
   },
   "devDependencies": {
+    "autoprefixer": "~6.0.3",
     "browser-sync": "~2.9.3",
     "del": "~2.0.2",
     "gulp": "gulpjs/gulp.git#4.0",
+    "gulp-postcss": "~6.0.0",
+    "gulp-sass": "~2.0.4",
     "gulp-sourcemaps": "~1.5.2",
     "gulp-tslint": "~3.2.0",
     "gulp-typescript": "~2.8.2",
@@ -28,6 +31,7 @@
     "karma": "~0.13.9",
     "karma-chrome-launcher": "~0.2.0",
     "karma-jasmine": "~0.3.6",
+    "minx": "~0.4.14",
     "object-assign": "~4.0.1",
     "traceur": "~0.0.91",
     "typescript": "~1.5.3"

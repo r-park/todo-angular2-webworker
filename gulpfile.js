@@ -1,9 +1,12 @@
 var assign      = require('object-assign'),
+    autoprefixer  = require('autoprefixer'),
     browserSync = require('browser-sync'),
     del         = require('del'),
     exec        = require('child_process').exec,
     gulp        = require('gulp'),
     karma       = require('karma'),
+    postcss       = require('gulp-postcss'),
+    sass          = require('gulp-sass'),
     sourcemaps  = require('gulp-sourcemaps'),
     todoServer  = require('todo-server'),
     tslint      = require('gulp-tslint'),
@@ -38,6 +41,7 @@ var paths = {
     css: 'src/**/*.css',
     html: 'src/**/*.html',
     js: 'src/**/*.js',
+    sass: 'src/**/*.scss',
     ts: 'src/**/*.ts'
   },
 
@@ -57,6 +61,10 @@ var paths = {
   CONFIG
 ---------------------------------------------------------*/
 var config = {
+  autoprefixer: {
+    browsers: ['last 3 versions', 'Firefox ESR', 'Opera 12.1']
+  },
+
   browserSync: {
     browser: ['google chrome canary'],
     files: [paths.target + '/**/*'],
@@ -69,6 +77,13 @@ var config = {
 
   karma: {
     configFile: __dirname + '/karma.conf.js'
+  },
+
+  sass: {
+    errLogToConsole: true,
+    outputStyle: 'nested',
+    precision: 10,
+    sourceComments: false
   },
 
   ts: {
@@ -168,6 +183,17 @@ gulp.task('lint', function(){
 });
 
 
+gulp.task('sass', function(){
+  return gulp
+    .src(paths.src.sass)
+    .pipe(sass(config.sass))
+    .pipe(postcss([
+      autoprefixer(config.autoprefixer)
+    ]))
+    .pipe(gulp.dest(paths.target));
+});
+
+
 gulp.task('server', function(done){
   browserSync
     .create()
@@ -197,10 +223,11 @@ gulp.task('ts', function(){
 gulp.task('build', gulp.series(
   'clean.target',
   'copy.angular',
-  'copy.css',
+  //'copy.css',
   'copy.html',
   'copy.js',
   'copy.lib',
+  'sass',
   'ts'
 ));
 
@@ -216,9 +243,13 @@ gulp.task('test.watch', function(){
 });
 
 
-gulp.task('default', gulp.series('build', function watch(){
-  gulp.watch(paths.src.css, gulp.task('copy.css'));
+gulp.task('default', gulp.series('build', 'server'));
+
+
+gulp.task('dev', gulp.series('build', 'server', function watch(){
+  //gulp.watch(paths.src.css, gulp.task('copy.css'));
   gulp.watch(paths.src.html, gulp.task('copy.html'));
   gulp.watch(paths.src.js, gulp.task('copy.js'));
+  gulp.watch(paths.src.sass, gulp.task('sass'));
   gulp.watch([paths.src.ts, paths.typings.watch], gulp.task('ts'));
 }));
