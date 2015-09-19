@@ -2,8 +2,8 @@
 
 <div>
   <a [router-link]="['/tasks']">View All</a>
-  <a [router-link]="['/tasks', {status: 'active'}]">Active</a>
-  <a [router-link]="['/tasks', {status: 'completed'}]">Completed</a>
+  <a [router-link]="['/tasks', {filter: 'active'}]">Active</a>
+  <a [router-link]="['/tasks', {filter: 'completed'}]">Completed</a>
 </div>
 
 <task-list></task-list>

@@ -22,19 +22,19 @@ import { TaskItem } from '../task-item/task-item';
 
 
 export class TaskList {
-  private status: string;
+  private filter: string;
   private taskService: TaskService;
 
   constructor(params: RouteParams, taskService: TaskService) {
-    this.status = params.params ? params.get('status') : ''; // issue: params.params is null
+    this.filter = params.params ? params.get('filter') : ''; // issue: params.params is null
     this.taskService = taskService;
   }
 
   get tasks(): ITask[] {
-    if (this.status === 'active') {
+    if (this.filter === 'active') {
       return this.activeTasks();
     }
-    else if (this.status === 'completed') {
+    else if (this.filter === 'completed') {
       return this.completedTasks();
     }
     return this.taskService.tasks;
