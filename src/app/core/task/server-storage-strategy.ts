@@ -1,10 +1,11 @@
 import { Injectable } from 'angular2/angular2';
 import { Http } from 'angular2/http';
 import { ITask, Task } from './task';
+import { ITaskService } from './task-service';
 
 
 @Injectable()
-export class ServerStorageStrategy {
+export class ServerStorageStrategy implements ITaskService {
   tasks: ITask[];
   private http: Http;
 
@@ -30,7 +31,7 @@ export class ServerStorageStrategy {
         });
   }
 
-  filterTasks(callback: (value: ITask, index: number, array: ITask[])=>boolean) {
+  filterTasks(callback: (value: ITask, index: number, array: ITask[]) => boolean) {
     return this.tasks.filter(callback);
   }
 

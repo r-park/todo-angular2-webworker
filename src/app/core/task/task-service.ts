@@ -2,14 +2,24 @@ import { Injectable } from 'angular2/angular2';
 import { ITask } from './task';
 
 
-export class TaskService {
+export interface ITaskService {
+  tasks: ITask[];
+  getTasks();
+  filterTasks(callback: (value: ITask, index: number, array: ITask[])=>boolean): ITask[];
+  createTask(title: string);
+  deleteTask(task: ITask);
+  updateTask(task: ITask);
+}
+
+
+export class TaskService implements ITaskService {
   tasks: ITask[];
 
   getTasks() {
     throw new Error('This method is abstract');
   }
 
-  filterTasks(callback: (value: ITask, index: number, array: ITask[])=>boolean) {
+  filterTasks(callback: (value: ITask, index: number, array: ITask[]) => boolean): ITask[] {
     throw new Error('This method is abstract');
   }
 

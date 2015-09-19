@@ -2,14 +2,14 @@ import { Injectable } from 'angular2/angular2';
 import { Json } from 'angular2/src/core/facade/lang';
 import { window } from 'angular2/src/core/facade/browser';
 import { ITask, Task } from './task';
+import { ITaskService } from './task-service';
 
 
 @Injectable()
-export class LocalStorageStrategy {
+export class LocalStorageStrategy implements ITaskService {
   tasks: ITask[];
 
   constructor() {
-    console.info('LocalStorageStrategy');
     this.tasks = [];
     this.getTasks();
   }
@@ -18,7 +18,7 @@ export class LocalStorageStrategy {
     this.tasks = Json.parse(window.localStorage.getItem('TODO-APP')) || [];
   }
 
-  filterTasks(callback: (value: ITask, index: number, array: ITask[])=>boolean) {
+  filterTasks(callback: (value: ITask, index: number, array: ITask[]) => boolean): ITask[] {
     return this.tasks.filter(callback);
   }
 
