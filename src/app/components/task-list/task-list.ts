@@ -15,7 +15,7 @@ import { TaskItem } from '../task-item/task-item';
     NgFor,
     TaskItem
   ],
-  encapsulation,
+  //encapsulation,
   styleUrls: ['app/components/task-list/task-list.css'],
   templateUrl: 'app/components/task-list/task-list.html'
 })

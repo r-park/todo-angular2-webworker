@@ -12,7 +12,7 @@ import { Tasks } from '../tasks/tasks';
   directives: [
     RouterOutlet
   ],
-  encapsulation,
+  //encapsulation,
   styleUrls: ['app/components/app/app.css'],
   templateUrl: 'app/components/app/app.html'
 })

@@ -21,7 +21,7 @@ import { TaskService } from 'app/core/task/task-service';
     NgControlName,
     NgFormModel
   ],
-  encapsulation,
+  //encapsulation,
   styleUrls: ['app/components/task-form/task-form.css'],
   templateUrl: 'app/components/task-form/task-form.html'
 })

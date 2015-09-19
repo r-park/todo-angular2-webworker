@@ -3,6 +3,7 @@ import {
   ControlGroup,
   DefaultValueAccessor,
   FormBuilder,
+  NgClass,
   NgControlName,
   NgFormModel,
   View
@@ -20,10 +21,11 @@ import { TaskService } from 'app/core/task/task-service';
 @View({
   directives: [
     DefaultValueAccessor,
+    NgClass,
     NgControlName,
     NgFormModel
   ],
-  encapsulation,
+  //encapsulation,
   styleUrls: ['app/components/task-item/task-item.css'],
   templateUrl: 'app/components/task-item/task-item.html'
 })
@@ -46,6 +48,7 @@ export class TaskItem {
   }
 
   edit() {
+    console.log('edit');
     this.editing = true;
     this.form.controls.title.updateValue(this.model.title);
   }

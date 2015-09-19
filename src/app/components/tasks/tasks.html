@@ -1,9 +1,15 @@
-<task-form></task-form>
+<div class="g-row">
+  <div class="g-col">
+    <task-form></task-form>
+  </div>
 
-<div>
-  <a [router-link]="['/tasks']">View All</a>
-  <a [router-link]="['/tasks', {filter: 'active'}]">Active</a>
-  <a [router-link]="['/tasks', {filter: 'completed'}]">Completed</a>
+  <div class="g-col">
+    <ul class="task-filters">
+      <li><a [router-link]="['/tasks']">View All</a></li>
+      <li><a [router-link]="['/tasks', {filter: 'active'}]">Active</a></li>
+      <li><a [router-link]="['/tasks', {filter: 'completed'}]">Completed</a></li>
+    </ul>
+
+    <task-list></task-list>
+  </div>
 </div>
-
-<task-list></task-list>

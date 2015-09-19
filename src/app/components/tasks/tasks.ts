@@ -15,7 +15,7 @@ import { TaskList } from '../task-list/task-list';
     TaskForm,
     TaskList
   ],
-  encapsulation,
+  //encapsulation,
   styleUrls: ['app/components/tasks/tasks.css'],
   templateUrl: 'app/components/tasks/tasks.html'
 })
