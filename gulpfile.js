@@ -31,8 +31,7 @@ var paths = {
       'node_modules/reflect-metadata/Reflect.js',
       'node_modules/rx/dist/rx.{min.js,map}',
       'node_modules/systemjs/dist/system.{js,js.map}',
-      'node_modules/zone.js/dist/zone.min.js',
-      'src/lib/*.js'
+      'node_modules/zone.js/dist/zone.min.js'
     ],
     target: 'target/lib'
   },
