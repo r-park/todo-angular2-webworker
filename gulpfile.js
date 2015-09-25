@@ -65,7 +65,7 @@ var config = {
   },
 
   browserSync: {
-    browser: ['google chrome canary'],
+    browser: ['google chrome'],
     files: [paths.target + '/**/*'],
     notify: false,
     port: 7000,
