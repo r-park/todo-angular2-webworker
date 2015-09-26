@@ -11,6 +11,7 @@ import {
 import { encapsulation } from 'app/utils/view-encapsulation';
 import { ITask } from 'app/core/task/task';
 import { TaskService } from 'app/core/task/task-service';
+import { FocusDirective } from 'app/directives/focus-directive';
 
 
 @Component({
@@ -21,6 +22,7 @@ import { TaskService } from 'app/core/task/task-service';
 @View({
   directives: [
     DefaultValueAccessor,
+    FocusDirective,
     NgClass,
     NgControlName,
     NgFormModel
@@ -48,7 +50,6 @@ export class TaskItem {
   }
 
   edit() {
-    console.log('edit');
     this.editing = true;
     this.form.controls.title.updateValue(this.model.title);
   }
