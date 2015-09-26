@@ -1,6 +1,5 @@
 import { Component, NgFor, View } from 'angular2/angular2';
 import { RouteParams } from 'angular2/router';
-import { encapsulation } from 'app/utils/view-encapsulation';
 import { ITask } from 'app/core/task/task';
 import { TaskService } from 'app/core/task/task-service';
 import { TaskItem } from '../task-item/task-item';
@@ -15,7 +14,6 @@ import { TaskItem } from '../task-item/task-item';
     NgFor,
     TaskItem
   ],
-  //encapsulation,
   styleUrls: ['app/components/task-list/task-list.css'],
   templateUrl: 'app/components/task-list/task-list.html'
 })

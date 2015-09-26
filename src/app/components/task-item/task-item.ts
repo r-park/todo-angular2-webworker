@@ -8,7 +8,6 @@ import {
   NgFormModel,
   View
 } from 'angular2/angular2';
-import { encapsulation } from 'app/utils/view-encapsulation';
 import { ITask } from 'app/core/task/task';
 import { TaskService } from 'app/core/task/task-service';
 import { FocusDirective } from 'app/directives/focus-directive';
@@ -27,7 +26,6 @@ import { FocusDirective } from 'app/directives/focus-directive';
     NgControlName,
     NgFormModel
   ],
-  //encapsulation,
   styleUrls: ['app/components/task-item/task-item.css'],
   templateUrl: 'app/components/task-item/task-item.html'
 })
