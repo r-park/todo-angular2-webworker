@@ -9,6 +9,7 @@
 
 .task-item {
   display: flex;
+  outline: none;
   border-bottom: 1px dotted #666;
   height: 60px;
   overflow: hidden;
@@ -17,7 +18,13 @@
   font-weight: 300;
 }
 
-.task-item--completed {}
+.task-item--editing {
+  border-bottom: 1px dotted #ccc;
+}
+
+[hidden] {
+  display: none !important;
+}
 
 
 //=====================================
@@ -44,25 +51,35 @@
 
 
 //=====================================
-//  CHECKBOX
+//  ICON BUTTONS
 //-------------------------------------
-.task-item__checkbox {
+.task-item__button {
+  @include button-base;
+  margin-left: 5px;
   outline: none;
+  border: 0;
   border-radius: 100px;
-  padding: 7px 8px 8px;
+  padding-top: 6px;
   width: 40px;
   height: 40px;
-  fill: #555;
-  cursor: pointer;
+  overflow: hidden;
   background: #2a2a2a;
 
-  &:hover {
+  &:first-child {
+    margin: 0;
+  }
+}
+
+.icon {
+  fill: #555;
+
+  .task-item__button:hover & {
     fill: #999;
   }
 }
 
-.task-item__checkbox--checked {
-  &, &:hover {
+.icon--active {
+  &, .task-item__button:hover & {
     fill: #85bf6b;
   }
 }
@@ -90,10 +107,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-
-  &[hidden] {
-    display: none;
-  }
 
   &:after {
     position: absolute;
@@ -127,6 +140,7 @@
 //  TITLE : INPUT
 //-------------------------------------
 .task-item__input {
+  outline: none;
   border: 0;
   padding: 0;
   width: 100%;
@@ -134,32 +148,4 @@
   color: inherit;
   font: inherit;
   background: transparent;
-}
-
-
-
-//=====================================
-//  BUTTONS
-//-------------------------------------
-.task-item__button {
-  @include button-base;
-  margin-left: 5px;
-  border: 0;
-  border-radius: 100px;
-  padding-top: 6px;
-  width: 40px;
-  height: 40px;
-  overflow: hidden;
-  background: #2a2a2a;
-
-  // svg icon
-  fill: #555;
-
-  &:first-child {
-    margin: 0;
-  }
-
-  &:hover {
-    fill: #999;
-  }
 }
