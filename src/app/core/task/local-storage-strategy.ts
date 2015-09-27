@@ -16,6 +16,7 @@ export class LocalStorageStrategy implements ITaskService {
 
   getTasks() {
     this.tasks = Json.parse(window.localStorage.getItem('TODO-APP')) || [];
+    return this.tasks;
   }
 
   filterTasks(callback: (value: ITask, index: number, array: ITask[]) => boolean): ITask[] {

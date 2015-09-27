@@ -1,16 +1,16 @@
-var assign      = require('object-assign'),
-    autoprefixer  = require('autoprefixer'),
-    browserSync = require('browser-sync'),
-    del         = require('del'),
-    exec        = require('child_process').exec,
-    gulp        = require('gulp'),
-    karma       = require('karma'),
-    postcss       = require('gulp-postcss'),
-    sass          = require('gulp-sass'),
-    sourcemaps  = require('gulp-sourcemaps'),
-    todoServer  = require('todo-server'),
-    tslint      = require('gulp-tslint'),
-    typescript  = require('gulp-typescript');
+var assign       = require('object-assign'),
+    autoprefixer = require('autoprefixer'),
+    browserSync  = require('browser-sync'),
+    del          = require('del'),
+    exec         = require('child_process').exec,
+    gulp         = require('gulp'),
+    karma        = require('karma'),
+    postcss      = require('gulp-postcss'),
+    sass         = require('gulp-sass'),
+    sourcemaps   = require('gulp-sourcemaps'),
+    todoServer   = require('todo-server'),
+    tslint       = require('gulp-tslint'),
+    typescript   = require('gulp-typescript');
 
 
 /*=========================================================
@@ -110,13 +110,6 @@ gulp.task('copy.angular', function(){
   return gulp
     .src(paths.angular.src)
     .pipe(gulp.dest(paths.angular.target));
-});
-
-
-gulp.task('copy.css', function(){
-  return gulp
-    .src(paths.src.css)
-    .pipe(gulp.dest(paths.target));
 });
 
 
@@ -222,7 +215,6 @@ gulp.task('ts', function(){
 gulp.task('build', gulp.series(
   'clean.target',
   'copy.angular',
-  //'copy.css',
   'copy.html',
   'copy.js',
   'copy.lib',
@@ -246,7 +238,6 @@ gulp.task('default', gulp.series('build', 'server'));
 
 
 gulp.task('dev', gulp.series('build', 'server', function watch(){
-  //gulp.watch(paths.src.css, gulp.task('copy.css'));
   gulp.watch(paths.src.html, gulp.task('copy.html'));
   gulp.watch(paths.src.js, gulp.task('copy.js'));
   gulp.watch(paths.src.sass, gulp.task('sass'));

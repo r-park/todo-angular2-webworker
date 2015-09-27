@@ -5,13 +5,14 @@ import { ITask } from './task';
 export interface ITaskService {
   tasks: ITask[];
   getTasks();
-  filterTasks(callback: (value: ITask, index: number, array: ITask[])=>boolean): ITask[];
+  filterTasks(callback: (value: ITask, index: number, array: ITask[]) => boolean): ITask[];
   createTask(title: string);
   deleteTask(task: ITask);
   updateTask(task: ITask);
 }
 
 
+@Injectable()
 export class TaskService implements ITaskService {
   tasks: ITask[];
 

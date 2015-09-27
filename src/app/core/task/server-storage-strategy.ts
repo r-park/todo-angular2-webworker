@@ -24,7 +24,7 @@ export class ServerStorageStrategy implements ITaskService {
       .subscribe(
         tasks => {
           console.log('getTasks:', tasks);
-          this.tasks = tasks
+          this.tasks = tasks;
         },
         error => {
           console.error('getTasks:', error);

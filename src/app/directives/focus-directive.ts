@@ -33,6 +33,8 @@ export class FocusDirective {
   }
 
   private clear(): void {
-    if (this.timeout) clearTimeout(this.timeout);
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
   }
 }

@@ -12,7 +12,7 @@
     "angular2": "2.0.0-alpha.37",
     "es6-module-loader": "~0.17.8",
     "reflect-metadata": "~0.1.2",
-    "rx": "~3.1.2",
+    "rx": "~4.0.0",
     "systemjs": "~0.19.3",
     "todo-server": "r-park/todo-server.git",
     "zone.js": "~0.5.5"
@@ -25,7 +25,7 @@
     "gulp-postcss": "~6.0.0",
     "gulp-sass": "~2.0.4",
     "gulp-sourcemaps": "~1.5.2",
-    "gulp-tslint": "~3.2.0",
+    "gulp-tslint": "~3.3.0",
     "gulp-typescript": "~2.9.0",
     "jasmine-core": "~2.3.4",
     "karma": "~0.13.10",
