@@ -27,7 +27,7 @@
     <form [hidden]="!editing" [ng-form-model]="form" (submit)="saveEdit()" novalidate>
       <input
         [focus]="editing"
-        (blur)="saveEdit()"
+        (blur)="cancelEdit()"
         (keyup.escape)="cancelEdit()"
         autocomplete="off"
         class="task-item__input"

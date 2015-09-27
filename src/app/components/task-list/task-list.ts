@@ -30,23 +30,11 @@ export class TaskList {
 
   get tasks(): ITask[] {
     if (this.filter === 'active') {
-      return this.activeTasks();
+      return this.taskService.filterActiveTasks();
     }
     else if (this.filter === 'completed') {
-      return this.completedTasks();
+      return this.taskService.filterCompletedTasks();
     }
     return this.taskService.tasks;
-  }
-
-  private activeTasks(): ITask[] {
-    return this.taskService.filterTasks((task: ITask) => {
-      return task.completed === false;
-    });
-  }
-
-  private completedTasks(): ITask[] {
-    return this.taskService.filterTasks((task: ITask) => {
-      return task.completed === true;
-    });
   }
 }

@@ -19,10 +19,6 @@ export class LocalStorageStrategy implements ITaskService {
     return this.tasks;
   }
 
-  filterTasks(callback: (value: ITask, index: number, array: ITask[]) => boolean): ITask[] {
-    return this.tasks.filter(callback);
-  }
-
   createTask(title: string) {
     this.tasks.push(new Task(title));
   }
@@ -37,6 +33,18 @@ export class LocalStorageStrategy implements ITaskService {
 
   updateTask(task: ITask) {
     this.save();
+  }
+
+  filterActiveTasks(): ITask[] {
+    return this.tasks.filter((task: ITask) => {
+      return task.completed === false;
+    });
+  }
+
+  filterCompletedTasks(): ITask[] {
+    return this.tasks.filter((task: ITask) => {
+      return task.completed;
+    });
   }
 
   private save() {
