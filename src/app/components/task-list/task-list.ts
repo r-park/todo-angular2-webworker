@@ -1,5 +1,5 @@
 import { Component, NgFor, View } from 'angular2/angular2';
-import { RouteParams } from 'angular2/router';
+import { RouterLink, RouteParams } from 'angular2/router';
 import { ITask } from 'app/core/task/task';
 import { TaskService } from 'app/core/task/task-service';
 import { TaskItem } from '../task-item/task-item';
@@ -12,6 +12,7 @@ import { TaskItem } from '../task-item/task-item';
 @View({
   directives: [
     NgFor,
+    RouterLink,
     TaskItem
   ],
   styleUrls: ['app/components/task-list/task-list.css'],
@@ -20,11 +21,11 @@ import { TaskItem } from '../task-item/task-item';
 
 
 export class TaskList {
-  private filter: string;
+  filter: string;
   private taskService: TaskService;
 
   constructor(params: RouteParams, taskService: TaskService) {
-    this.filter = params.params ? params.get('filter') : ''; // issue: params.params is null
+    this.filter = params.get('filter');
     this.taskService = taskService;
   }
 

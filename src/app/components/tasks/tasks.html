@@ -4,12 +4,6 @@
   </div>
 
   <div class="g-col">
-    <ul class="task-filters">
-      <li><a [router-link]="['/tasks']">View All</a></li>
-      <li><a [router-link]="['/tasks', {filter: 'active'}]">Active</a></li>
-      <li><a [router-link]="['/tasks', {filter: 'completed'}]">Completed</a></li>
-    </ul>
-
     <task-list></task-list>
   </div>
 </div>

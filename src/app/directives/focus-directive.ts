@@ -28,13 +28,13 @@ export class FocusDirective {
     }
   }
 
-  onDestroy(): void {
-    this.clear();
-  }
-
-  private clear(): void {
+  clear(): void {
     if (this.timeout) {
       clearTimeout(this.timeout);
     }
+  }
+
+  onDestroy(): void {
+    this.clear();
   }
 }
