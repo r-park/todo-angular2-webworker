@@ -1,5 +1,4 @@
-var assign       = require('object-assign'),
-    autoprefixer = require('autoprefixer'),
+var autoprefixer = require('autoprefixer'),
     browserSync  = require('browser-sync'),
     del          = require('del'),
     exec         = require('child_process').exec,
@@ -34,6 +33,13 @@ var paths = {
       'node_modules/zone.js/dist/zone.min.js'
     ],
     target: 'target/lib'
+  },
+
+  rxjs: {
+    src: [
+      'node_modules/@reactivex/rxjs/dist/cjs/**/*.js'
+    ],
+    target: 'target/lib/@reactivex/rxjs/dist/cjs'
   },
 
   src: {
@@ -134,33 +140,10 @@ gulp.task('copy.lib', function(){
 });
 
 
-function karmaServer(options, done) {
-  var server = new karma.Server(options, function(error){
-    if (error) process.exit(error);
-    done();
-  });
-  server.start();
-}
-
-
-gulp.task('karma', function(done){
-  karmaServer(config.karma, done);
-});
-
-
-gulp.task('karma.single', function(done){
-  config.karma.singleRun = true;
-  karmaServer(config.karma, done);
-});
-
-
-gulp.task('karma.run', function(done){
-  var cmd = process.platform === 'win32' ? 'node_modules\\.bin\\karma run karma.conf.js' : 'node node_modules/.bin/karma run karma.conf.js';
-  exec(cmd, function(error, stdout){
-    // Ignore errors in the interactive (non-ci) mode.
-    // Karma server will print all test failures.
-    done();
-  });
+gulp.task('copy.rxjs', function(){
+  return gulp
+    .src(paths.rxjs.src)
+    .pipe(gulp.dest(paths.rxjs.target));
 });
 
 
@@ -212,34 +195,74 @@ gulp.task('ts', function(){
 });
 
 
+/*===========================
+  BUILD
+---------------------------*/
 gulp.task('build', gulp.series(
   'clean.target',
   'copy.angular',
   'copy.html',
   'copy.js',
   'copy.lib',
+  'copy.rxjs',
   'sass',
   'ts'
 ));
 
 
-gulp.task('test', gulp.series('lint', 'build', 'karma'));
-
-
-gulp.task('test.single', gulp.series('lint', 'build', 'karma.single'));
-
-
-gulp.task('test.watch', function(){
-  gulp.watch(paths.src.ts, gulp.series('ts', 'karma.run'));
-});
-
-
-gulp.task('default', gulp.series('build', 'server'));
-
-
+/*===========================
+  DEVELOP
+---------------------------*/
 gulp.task('dev', gulp.series('build', 'server', function watch(){
   gulp.watch(paths.src.html, gulp.task('copy.html'));
   gulp.watch(paths.src.js, gulp.task('copy.js'));
   gulp.watch(paths.src.sass, gulp.task('sass'));
   gulp.watch([paths.src.ts, paths.typings.watch], gulp.task('ts'));
 }));
+
+
+/*===========================
+  TEST
+---------------------------*/
+function karmaServer(options, done) {
+  var server = new karma.Server(options, function(error){
+    if (error) process.exit(error);
+    done();
+  });
+  server.start();
+}
+
+
+gulp.task('karma', function(done){
+  karmaServer(config.karma, done);
+});
+
+
+gulp.task('karma.single', function(done){
+  config.karma.singleRun = true;
+  karmaServer(config.karma, done);
+});
+
+
+gulp.task('karma.run', function(done){
+  var cmd = process.platform === 'win32' ? 'node_modules\\.bin\\karma run karma.conf.js' : 'node node_modules/.bin/karma run karma.conf.js';
+  exec(cmd, function(error, stdout){
+    // Ignore errors in the interactive (non-ci) mode.
+    // Karma server will print all test failures.
+    done();
+  });
+});
+
+
+gulp.task('test', gulp.series(/*'lint',*/ 'build', 'karma.single'));
+
+
+gulp.task('test.watch', gulp.parallel(gulp.series(/*'lint',*/ 'build', 'karma'), function(){
+  gulp.watch(paths.src.ts, gulp.series('ts', 'karma.run'));
+}));
+
+
+/*===========================
+  RUN
+---------------------------*/
+gulp.task('default', gulp.series('build', 'server'));

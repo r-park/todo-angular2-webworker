@@ -1,4 +1,4 @@
-import { Component, View } from 'angular2/angular2';
+import { Component, View, ViewEncapsulation } from 'angular2/angular2';
 import { RouteConfig, RouterOutlet } from 'angular2/router';
 import { Tasks } from '../tasks/tasks';
 
@@ -11,13 +11,14 @@ import { Tasks } from '../tasks/tasks';
   directives: [
     RouterOutlet
   ],
+  encapsulation: ViewEncapsulation.Emulated,
   styleUrls: ['app/components/app/app.css'],
   templateUrl: 'app/components/app/app.html'
 })
 
 @RouteConfig([
   { path: '/', redirectTo: '/tasks' },
-  { path: '/tasks', as: 'tasks', component: Tasks }
+  { path: '/tasks', as: 'Tasks', component: Tasks }
 ])
 
 

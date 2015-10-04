@@ -1,4 +1,4 @@
-import { Component, NgFor, View, ViewMetadata } from 'angular2/angular2';
+import { Component, NgFor, View, ViewEncapsulation, ViewMetadata } from 'angular2/angular2';
 import { RouterLink, RouteParams } from 'angular2/router';
 import { ITask } from 'app/core/task/task';
 import { TaskService } from 'app/core/task/task-service';
@@ -16,6 +16,7 @@ import { TaskFilterPipe } from './task-filter-pipe';
     RouterLink,
     TaskItem
   ],
+  encapsulation: ViewEncapsulation.Emulated,
   pipes: [
     TaskFilterPipe
   ],
