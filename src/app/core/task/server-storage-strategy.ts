@@ -77,16 +77,4 @@ export class ServerStorageStrategy implements ITaskService {
           console.error('updateTask:', error);
         });
   }
-
-  filterActiveTasks(): ITask[] {
-    return this.tasks.filter((task: ITask) => {
-      return task.completed === false;
-    });
-  }
-
-  filterCompletedTasks(): ITask[] {
-    return this.tasks.filter((task: ITask) => {
-      return task.completed;
-    });
-  }
 }

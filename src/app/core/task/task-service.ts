@@ -8,8 +8,6 @@ export interface ITaskService {
   createTask(title: string);
   deleteTask(task: ITask);
   updateTask(task: ITask);
-  filterActiveTasks(): ITask[];
-  filterCompletedTasks(): ITask[];
 }
 
 
@@ -20,6 +18,4 @@ export abstract class TaskService implements ITaskService {
   abstract createTask(title: string);
   abstract deleteTask(task: ITask);
   abstract updateTask(task: ITask);
-  abstract filterActiveTasks(): ITask[];
-  abstract filterCompletedTasks(): ITask[];
 }

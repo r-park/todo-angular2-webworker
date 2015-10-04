@@ -35,18 +35,6 @@ export class LocalStorageStrategy implements ITaskService {
     this.save();
   }
 
-  filterActiveTasks(): ITask[] {
-    return this.tasks.filter((task: ITask) => {
-      return task.completed === false;
-    });
-  }
-
-  filterCompletedTasks(): ITask[] {
-    return this.tasks.filter((task: ITask) => {
-      return task.completed;
-    });
-  }
-
   private save() {
     window.localStorage.setItem('TODO-APP', Json.stringify(this.tasks));
   }
