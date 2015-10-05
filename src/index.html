@@ -19,9 +19,6 @@
   <app></app>
 
 
-  <script src="lib/Reflect.js"></script>
-  <script src="lib/zone.min.js"></script>
-  <script src="lib/es6-module-loader.js"></script>
   <script src="lib/system.js"></script>
   <script>
     System.config({
@@ -32,7 +29,11 @@
         '@reactivex/rxjs/*': 'lib/@reactivex/rxjs/*.js'
       }
     });
-
+  </script>
+  <script src="lib/angular2.dev.js"></script>
+  <script src="lib/http.dev.js"></script>
+  <script src="lib/router.dev.js"></script>
+  <script>
     System.import('app/main').catch(function(error){
       console.log(error);
     });

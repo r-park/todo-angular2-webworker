@@ -1,41 +1,35 @@
-import { Injectable } from 'angular2/angular2';
-import { Json } from 'angular2/src/core/facade/lang';
-import { window } from 'angular2/src/core/facade/browser';
 import { ITask, Task } from './task';
 import { ITaskService } from './task-service';
 
 
-@Injectable()
 export class LocalStorageStrategy implements ITaskService {
-  tasks: ITask[];
+  tasks: ITask[] = [];
 
   constructor() {
-    this.tasks = [];
-    this.getTasks();
+    this.loadTasks();
   }
 
-  getTasks() {
-    this.tasks = Json.parse(window.localStorage.getItem('TODO-APP')) || [];
-    return this.tasks;
+  loadTasks(): void {
+    this.tasks = JSON.parse(localStorage.getItem('TODO-APP')) || [];
   }
 
-  createTask(title: string) {
+  createTask(title: string): void {
     this.tasks.push(new Task(title));
   }
 
-  deleteTask(task: ITask) {
-    const index: number = this.tasks.indexOf(task);
+  deleteTask(task: ITask): void {
+    let index: number = this.tasks.indexOf(task);
     if (index > -1) {
       this.tasks.splice(index, 1);
     }
     this.save();
   }
 
-  updateTask(task: ITask) {
+  updateTask(task: ITask): void {
     this.save();
   }
 
-  private save() {
-    window.localStorage.setItem('TODO-APP', Json.stringify(this.tasks));
+  private save(): void {
+    localStorage.setItem('TODO-APP', JSON.stringify(this.tasks));
   }
 }

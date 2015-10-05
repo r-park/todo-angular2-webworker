@@ -1,21 +1,19 @@
-import { Injectable } from 'angular2/angular2';
 import { ITask } from './task';
 
 
 export interface ITaskService {
   tasks: ITask[];
-  getTasks();
-  createTask(title: string);
-  deleteTask(task: ITask);
-  updateTask(task: ITask);
+  loadTasks(): void;
+  createTask(title: string): void;
+  deleteTask(task: ITask): void;
+  updateTask(task: ITask): void;
 }
 
 
-@Injectable()
 export abstract class TaskService implements ITaskService {
   tasks: ITask[];
-  abstract getTasks();
-  abstract createTask(title: string);
-  abstract deleteTask(task: ITask);
-  abstract updateTask(task: ITask);
+  abstract loadTasks(): void;
+  abstract createTask(title: string): void;
+  abstract deleteTask(task: ITask): void;
+  abstract updateTask(task: ITask): void;
 }

@@ -8,21 +8,22 @@ import { ITask } from 'app/core/task/task';
 
 export class TaskFilterPipe implements PipeTransform {
   transform(list: ITask[], args: any[] = null): ITask[] {
-    let filter = args[0];
+    let filter: string = args[0];
+    let completed: boolean = null;
 
     if (!filter) {
       return list;
     }
 
     if (filter === 'active') {
-      filter = false;
+      completed = false;
     }
     else if (filter === 'completed') {
-      filter = true;
+      completed = true;
     }
 
     return list.filter((task: ITask) => {
-      return task.completed === filter;
+      return task.completed === completed;
     });
   }
 }

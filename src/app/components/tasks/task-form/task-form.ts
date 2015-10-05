@@ -22,8 +22,8 @@ import { TaskService } from 'app/core/task/task-service';
     NgFormModel
   ],
   encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: ['app/components/task-form/task-form.css'],
-  templateUrl: 'app/components/task-form/task-form.html'
+  styleUrls: ['app/components/tasks/task-form/task-form.css'],
+  templateUrl: 'app/components/tasks/task-form/task-form.html'
 })
 
 
@@ -36,15 +36,15 @@ export class TaskForm {
     this.taskService = taskService;
   }
 
-  cancel() {
+  cancel(): void {
     this.clear();
   }
 
-  clear() {
+  clear(): void {
     this.form.controls.title.updateValue('');
   }
 
-  submit() {
+  submit(): void {
     if (this.form.valid) {
       this.taskService.createTask(this.form.controls.title.value);
       this.clear();

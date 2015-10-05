@@ -20,8 +20,8 @@ import { TaskFilterPipe } from './task-filter-pipe';
   pipes: [
     TaskFilterPipe
   ],
-  styleUrls: ['app/components/task-list/task-list.css'],
-  templateUrl: 'app/components/task-list/task-list.html'
+  styleUrls: ['app/components/tasks/task-list/task-list.css'],
+  templateUrl: 'app/components/tasks/task-list/task-list.html'
 })
 
 

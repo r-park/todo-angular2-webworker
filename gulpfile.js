@@ -26,9 +26,9 @@ var paths = {
 
   lib: {
     src: [
+      'node_modules/angular2/bundles/{angular2.dev,http.dev,router.dev}.{js,js.map}',
       'node_modules/es6-module-loader/dist/es6-module-loader.{js,js.map}',
       'node_modules/reflect-metadata/Reflect.js',
-      'node_modules/rx/dist/rx.{min.js,map}',
       'node_modules/systemjs/dist/system.{js,js.map}',
       'node_modules/zone.js/dist/zone.min.js'
     ],
@@ -76,8 +76,9 @@ var config = {
     notify: false,
     port: 7000,
     reloadDelay: 200,
-    server: {baseDir: '.'},
-    startPath: paths.target
+    server: {
+      baseDir: paths.target
+    }
   },
 
   karma: {
@@ -254,10 +255,10 @@ gulp.task('karma.run', function(done){
 });
 
 
-gulp.task('test', gulp.series(/*'lint',*/ 'build', 'karma.single'));
+gulp.task('test', gulp.series('lint', 'build', 'karma.single'));
 
 
-gulp.task('test.watch', gulp.parallel(gulp.series(/*'lint',*/ 'build', 'karma'), function(){
+gulp.task('test.watch', gulp.parallel(gulp.series('lint', 'build', 'karma'), function(){
   gulp.watch(paths.src.ts, gulp.series('ts', 'karma.run'));
 }));
 

@@ -1,7 +1,6 @@
 import {
   Directive,
   ElementRef,
-  LifecycleEvent,
   OnDestroy
 } from 'angular2/angular2';
 
@@ -13,7 +12,7 @@ import {
 
 export class FocusDirective implements OnDestroy {
   element: ElementRef;
-  timeout: number;
+  private timeout: number;
 
   constructor(element: ElementRef) {
     this.element = element;

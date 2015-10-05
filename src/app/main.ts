@@ -6,9 +6,9 @@ import { App } from 'app/components/app/app';
 
 
 bootstrap(App, [
-  FORM_BINDINGS,
-  HTTP_BINDINGS,
   routerBindings(App),
   bind(LocationStrategy).toClass(HashLocationStrategy),
+  FORM_BINDINGS,
+  HTTP_BINDINGS,
   TASK_BINDINGS
 ]).catch((err: Error) => console.error(err));

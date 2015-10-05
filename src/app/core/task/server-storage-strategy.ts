@@ -1,80 +1,62 @@
 import { Injectable } from 'angular2/angular2';
-import { Http } from 'angular2/http';
+import { Http, Response } from 'angular2/http';
 import { ITask, Task } from './task';
 import { ITaskService } from './task-service';
 
 
 @Injectable()
 export class ServerStorageStrategy implements ITaskService {
-  tasks: ITask[];
-  private http: Http;
+  tasks: ITask[] = [];
 
-  constructor(http: Http) {
-    console.info('ServerStorageStrategy');
-    this.http = http;
-    this.tasks = [];
-    this.getTasks();
+  constructor(private http: Http) {
+    this.loadTasks();
   }
 
-  getTasks() {
+  loadTasks(): void {
     this.http
       .get('http://localhost:8000/tasks')
-      .toRx()
-      .map(response => response.json())
+      .map((res: Response) => res.json())
       .subscribe(
-        tasks => {
-          console.log('getTasks:', tasks);
+        (tasks: ITask[]) => {
+          console.log('loadTasks:', tasks);
           this.tasks = tasks;
         },
-        error => {
-          console.error('getTasks:', error);
-        });
+        (error: Error) => console.error('loadTasks:', error)
+      );
   }
 
-  filterTasks(callback: (value: ITask, index: number, array: ITask[]) => boolean) {
-    return this.tasks.filter(callback);
-  }
-
-  createTask(title: string) {
-    const task = new Task(title);
+  createTask(title: string): void {
     this.http
-      .post('http://localhost:8000/tasks', JSON.stringify(task))
-      .toRx()
-      .map(response => response.json())
+      .post('http://localhost:8000/tasks', JSON.stringify(new Task(title)))
+      .map((res: Response) => res.json())
       .subscribe(
-        tasks => {
-          console.log('createTask:', tasks);
-          this.tasks.push(tasks);
+        (task: ITask) => {
+          console.log('createTask:', task);
+          this.tasks.push(task);
         },
-        error => {
-          console.error('createTask:', error);
-        });
+        (error: Error) => console.error('loadTasks:', error)
+      );
   }
 
-  deleteTask(task: ITask) {
+  deleteTask(task: ITask): void {
     this.http
-      .delete('http://localhost:8000' + task.links.self)
-      .toRx()
+      .delete(`http://localhost:8000${task.links.self}`)
       .subscribe(
-        response => {
-          console.log('deleteTask:', response);
+        (res: Response) => {
+          console.log('deleteTask:', res);
           this.tasks.splice(this.tasks.indexOf(task), 1);
         },
-        error => {
-          console.error('deleteTask:', error);
-        });
+        (error: Error) => console.error('deleteTask:', error)
+      );
   }
 
-  updateTask(task: ITask) {
+  updateTask(task: ITask): void {
     this.http
-      .put('http://localhost:8000' + task.links.self, JSON.stringify(task))
-      .toRx()
+      .put(`http://localhost:8000${task.links.self}`, JSON.stringify(task))
+      .map((res: Response) => res.json())
       .subscribe(
-        response => {
-          console.log('updateTask:', response);
-        },
-        error => {
-          console.error('updateTask:', error);
-        });
+        (res: Response) => console.log('updateTask:', res),
+        (error: Error) => console.error('updateTask:', error)
+      );
   }
 }

@@ -28,8 +28,8 @@ import { FocusDirective } from 'app/directives/focus-directive';
     NgFormModel
   ],
   encapsulation: ViewEncapsulation.Emulated,
-  styleUrls: ['app/components/task-item/task-item.css'],
-  templateUrl: 'app/components/task-item/task-item.html'
+  styleUrls: ['app/components/tasks/task-item/task-item.css'],
+  templateUrl: 'app/components/tasks/task-item/task-item.html'
 })
 
 
@@ -45,20 +45,20 @@ export class TaskItem {
     this.taskService = taskService;
   }
 
-  delete() {
+  delete(): void {
     this.taskService.deleteTask(this.model);
   }
 
-  edit() {
+  edit(): void {
     this.editing = true;
     this.form.controls.title.updateValue(this.model.title);
   }
 
-  cancelEdit() {
+  cancelEdit(): void {
     this.editing = false;
   }
 
-  saveEdit() {
+  saveEdit(): void {
     if (this.editing) {
       const value: string = this.form.controls.title.value.trim();
       if (value.length && value !== this.model.title) {
@@ -69,7 +69,7 @@ export class TaskItem {
     }
   }
 
-  toggleStatus() {
+  toggleStatus(): void {
     this.model.completed = !this.model.completed;
     this.taskService.updateTask(this.model);
   }

@@ -1,6 +1,6 @@
 import { Component, View, ViewEncapsulation } from 'angular2/angular2';
-import { TaskForm } from '../task-form/task-form';
-import { TaskList } from '../task-list/task-list';
+import { TaskForm } from './task-form/task-form';
+import { TaskList } from './task-list/task-list';
 
 
 @Component({
