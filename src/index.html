@@ -23,16 +23,12 @@
   <script>
     System.config({
       baseURL: './',
-      defaultJSExtensions: true,
-      paths: {
-        'angular2/*': 'lib/angular2/*',
-        '@reactivex/rxjs/*': 'lib/@reactivex/rxjs/*.js'
-      }
+      defaultJSExtensions: true
     });
   </script>
-  <script src="lib/angular2.dev.js"></script>
-  <script src="lib/http.dev.js"></script>
-  <script src="lib/router.dev.js"></script>
+  <script src="https://code.angularjs.org/2.0.0-alpha.39/angular2.dev.js"></script>
+  <script src="https://code.angularjs.org/2.0.0-alpha.39/http.dev.js"></script>
+  <script src="https://code.angularjs.org/2.0.0-alpha.39/router.dev.js"></script>
   <script>
     System.import('app/main').catch(function(error){
       console.log(error);
