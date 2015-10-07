@@ -24,11 +24,6 @@ Without gulp v4:
 ```
 
 #### Installing Gulp v4 (optional)
-If you already have gulp v3.x installed globally, it must be removed to make way for v4.
-```bash
-npm uninstall -g gulp
-```
-Next, install the gulp v4 `gulp-cli` globally.
 ```bash
 npm install -g gulpjs/gulp-cli#4.0
 ```
@@ -48,7 +43,6 @@ gulp dev
 Running `gulp dev` will:
 - Build the project
 - Start the server at <a href="http://localhost:7000" target="_blank">localhost:7000</a>
-- Open the app in Google Chrome
 - Watch for changes to the source files and process changes
 - Live-reload the browser
 
