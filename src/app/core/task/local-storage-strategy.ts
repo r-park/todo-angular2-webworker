@@ -1,16 +1,21 @@
+import { Injectable } from 'angular2/angular2';
+import { StorageConfig } from 'app/config/storage-config';
 import { ITask, Task } from './task';
 import { ITaskService } from './task-service';
 
 
+@Injectable()
 export class LocalStorageStrategy implements ITaskService {
+  storageKey: string;
   tasks: ITask[] = [];
 
-  constructor() {
+  constructor(config: StorageConfig) {
+    this.storageKey = config.localStorageKey;
     this.loadTasks();
   }
 
   loadTasks(): void {
-    this.tasks = JSON.parse(localStorage.getItem('TODO-APP')) || [];
+    this.tasks = JSON.parse(localStorage.getItem(this.storageKey)) || [];
   }
 
   createTask(title: string): void {
@@ -30,6 +35,6 @@ export class LocalStorageStrategy implements ITaskService {
   }
 
   private save(): void {
-    localStorage.setItem('TODO-APP', JSON.stringify(this.tasks));
+    localStorage.setItem(this.storageKey, JSON.stringify(this.tasks));
   }
 }
