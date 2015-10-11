@@ -8,7 +8,7 @@ import { Tasks } from '../tasks/tasks';
 })
 
 @View({
-  directives: [
+  directives: <any>[
     RouterOutlet
   ],
   styleUrls: ['app/components/app/app.css'],
@@ -19,6 +19,5 @@ import { Tasks } from '../tasks/tasks';
   { path: '/', redirectTo: '/tasks' },
   { path: '/tasks', as: 'Tasks', component: Tasks }
 ])
-
 
 export class App {}

@@ -1,7 +1,7 @@
 {
   "name": "todo-angular-2",
   "version": "0.1.0",
-  "description": "todo-angular-2",
+  "description": "Todo app with Angular 2",
   "homepage": "https://github.com/r-park/todo-angular-2",
   "repository": "https://github.com/r-park/todo-angular-2.git",
   "author": "Richard Park",
@@ -9,17 +9,17 @@
   "private": true,
   "scripts": {},
   "dependencies": {
-    "angular2": "2.0.0-alpha.39",
+    "angular2": "2.0.0-alpha.40",
     "es6-module-loader": "~0.17.8",
     "reflect-metadata": "~0.1.2",
     "@reactivex/rxjs": "0.0.0-prealpha.3",
-    "systemjs": "~0.19.3",
+    "systemjs": "~0.19.4",
     "todo-server": "r-park/todo-server.git",
     "zone.js": "~0.5.8"
   },
   "devDependencies": {
     "autoprefixer": "~6.0.3",
-    "browser-sync": "~2.9.10",
+    "browser-sync": "~2.9.11",
     "del": "~2.0.2",
     "gulp": "gulpjs/gulp.git#4.0",
     "gulp-postcss": "~6.0.1",
@@ -29,7 +29,7 @@
     "gulp-typescript": "~2.9.2",
     "jasmine-core": "~2.3.4",
     "karma": "~0.13.10",
-    "karma-chrome-launcher": "~0.2.0",
+    "karma-chrome-launcher": "~0.2.1",
     "karma-jasmine": "~0.3.6",
     "minx": "~0.4.14",
     "traceur": "~0.0.91",

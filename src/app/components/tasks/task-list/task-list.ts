@@ -23,7 +23,6 @@ import { TaskFilterPipe } from './task-filter-pipe';
   templateUrl: 'app/components/tasks/task-list/task-list.html'
 })
 
-
 export class TaskList {
   filter: string;
   private taskService: TaskService;
