@@ -18,16 +18,18 @@ var autoprefixer = require('autoprefixer'),
 var paths = {
   lib: {
     src: [
+      'node_modules/angular2/bundles/angular2.min.js',
+      'node_modules/angular2/bundles/http.min.js',
+      'node_modules/angular2/bundles/router.dev.min.{js,js.map}',
       'node_modules/es6-module-loader/dist/es6-module-loader.{js,js.map}',
+      'node_modules/es6-shim/es6-shim.{map,min.js}',
       'node_modules/systemjs/dist/system.{js,js.map}'
     ],
     target: 'target/lib'
   },
 
   src: {
-    css: 'src/**/*.css',
     html: 'src/**/*.html',
-    js: 'src/**/*.js',
     sass: 'src/**/*.scss',
     ts: 'src/**/*.ts'
   },
@@ -57,7 +59,7 @@ var config = {
     notify: false,
     open: false,
     port: 7000,
-    reloadDelay: 200,
+    reloadDelay: 1200,
     server: {
       baseDir: paths.target
     }
@@ -96,29 +98,19 @@ gulp.task('clean.target', function(){
 
 
 gulp.task('copy.html', function(){
-  return gulp
-    .src(paths.src.html)
-    .pipe(gulp.dest(paths.target));
-});
-
-
-gulp.task('copy.js', function(){
-  return gulp
-    .src(paths.src.js)
+  return gulp.src(paths.src.html)
     .pipe(gulp.dest(paths.target));
 });
 
 
 gulp.task('copy.lib', function(){
-  return gulp
-    .src(paths.lib.src)
+  return gulp.src(paths.lib.src)
     .pipe(gulp.dest(paths.lib.target));
 });
 
 
 gulp.task('lint', function(){
-  return gulp
-    .src(paths.src.ts)
+  return gulp.src(paths.src.ts)
     .pipe(tslint())
     .pipe(tslint.report(
       config.tslint.report.type,
@@ -128,8 +120,7 @@ gulp.task('lint', function(){
 
 
 gulp.task('sass', function(){
-  return gulp
-    .src(paths.src.sass)
+  return gulp.src(paths.src.sass)
     .pipe(sass(config.sass))
     .pipe(postcss([
       autoprefixer(config.autoprefixer)
@@ -138,14 +129,13 @@ gulp.task('sass', function(){
 });
 
 
-gulp.task('server', function(done){
-  browserSync
-    .create()
+gulp.task('serve', function(done){
+  browserSync.create()
     .init(config.browserSync, done);
 });
 
 
-gulp.task('server.api', function(done){
+gulp.task('serve.api', function(done){
   todoServer.start();
   done();
 });
@@ -154,8 +144,7 @@ gulp.task('server.api', function(done){
 var tsProject = typescript.createProject(config.ts.configFile);
 
 gulp.task('ts', function(){
-  return gulp
-    .src([paths.src.ts].concat(paths.typings.entries))
+  return gulp.src([paths.src.ts].concat(paths.typings.entries))
     .pipe(sourcemaps.init())
     .pipe(typescript(tsProject))
     .js
@@ -170,7 +159,6 @@ gulp.task('ts', function(){
 gulp.task('build', gulp.series(
   'clean.target',
   'copy.html',
-  'copy.js',
   'copy.lib',
   'sass',
   'ts'
@@ -180,12 +168,15 @@ gulp.task('build', gulp.series(
 /*===========================
   DEVELOP
 ---------------------------*/
-gulp.task('dev', gulp.series('build', 'server', function watch(){
-  gulp.watch(paths.src.html, gulp.task('copy.html'));
-  gulp.watch(paths.src.js, gulp.task('copy.js'));
-  gulp.watch(paths.src.sass, gulp.task('sass'));
-  gulp.watch([paths.src.ts, paths.typings.watch], gulp.task('ts'));
-}));
+gulp.task('default', gulp.series(
+  'build',
+  'serve',
+  function watch(){
+    gulp.watch(paths.src.html, gulp.task('copy.html'));
+    gulp.watch(paths.src.sass, gulp.task('sass'));
+    gulp.watch([paths.src.ts, paths.typings.watch], gulp.task('ts'));
+  }
+));
 
 
 /*===========================
@@ -201,12 +192,12 @@ function karmaServer(options, done) {
 
 
 gulp.task('karma', function(done){
+  config.karma.singleRun = true;
   karmaServer(config.karma, done);
 });
 
 
-gulp.task('karma.single', function(done){
-  config.karma.singleRun = true;
+gulp.task('karma.watch', function(done){
   karmaServer(config.karma, done);
 });
 
@@ -214,22 +205,23 @@ gulp.task('karma.single', function(done){
 gulp.task('karma.run', function(done){
   var cmd = process.platform === 'win32' ? 'node_modules\\.bin\\karma run karma.conf.js' : 'node node_modules/.bin/karma run karma.conf.js';
   exec(cmd, function(error, stdout){
-    // Ignore errors in the interactive (non-ci) mode.
-    // Karma server will print all test failures.
     done();
   });
 });
 
 
-gulp.task('test', gulp.series(/*'lint',*/ 'build', 'karma.single'));
+gulp.task('test', gulp.series('lint', 'build', 'karma'));
 
 
-gulp.task('test.watch', gulp.parallel(gulp.series(/*'lint',*/ 'build', 'karma'), function(){
-  gulp.watch(paths.src.ts, gulp.series('ts', 'karma.run'));
-}));
+gulp.task('test.watch', gulp.parallel(
+  gulp.series('lint', 'build', 'karma.watch'),
+  function(){
+    gulp.watch(paths.src.ts, gulp.series('ts', 'karma.run'));
+  }
+));
 
 
 /*===========================
   RUN
 ---------------------------*/
-gulp.task('default', gulp.series('build', 'server'));
+gulp.task('run', gulp.series('build', 'serve'));

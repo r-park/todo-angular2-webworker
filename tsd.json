@@ -6,22 +6,13 @@
   "bundle": "typings/tsd/tsd.d.ts",
   "installed": {
     "es6-shim/es6-shim.d.ts": {
-      "commit": "e9be3cecf8a326d3e220c52b42d218169a7bb9f2"
-    },
-    "angular2/angular2.d.ts": {
-      "commit": "e9be3cecf8a326d3e220c52b42d218169a7bb9f2"
+      "commit": "421d6610bdb09e1015b71f5991d7a68d079eca21"
     },
     "jasmine/jasmine.d.ts": {
-      "commit": "e9be3cecf8a326d3e220c52b42d218169a7bb9f2"
-    },
-    "angular2/http.d.ts": {
-      "commit": "e9be3cecf8a326d3e220c52b42d218169a7bb9f2"
-    },
-    "angular2/router.d.ts": {
-      "commit": "e9be3cecf8a326d3e220c52b42d218169a7bb9f2"
+      "commit": "421d6610bdb09e1015b71f5991d7a68d079eca21"
     },
     "sinon/sinon.d.ts": {
-      "commit": "66f88ec51858bb21bc375fa91a963c04bc09401e"
+      "commit": "421d6610bdb09e1015b71f5991d7a68d079eca21"
     }
   }
 }

@@ -1,8 +1,5 @@
 module.exports = function(config) {
   config.set({
-
-    basePath: '.',
-
     frameworks: ['jasmine'],
 
     /**
@@ -16,24 +13,17 @@ module.exports = function(config) {
       'node_modules/zone.js/dist/jasmine-patch.js',
       'node_modules/traceur/bin/traceur-runtime.js',
       'node_modules/es6-module-loader/dist/es6-module-loader.js',
+      'node_modules/sinon/pkg/sinon.js',
       'node_modules/systemjs/dist/system.js', // [ 2 ]
       'node_modules/reflect-metadata/Reflect.js',
-      'node_modules/sinon/pkg/sinon.js',
       {pattern: 'node_modules/@reactivex/rxjs/**', included: false, watched: false}, // [ 3 ]
       {pattern: 'node_modules/angular2/**', included: false, watched: false}, // [ 3 ]
+      {pattern: 'test/lib/**', included: false, watched: false}, // [ 3 ]
       {pattern: 'target/**', included: false, watched: false}, // [ 3 ]
       'karma.loader.js'
     ],
 
-    exclude: [],
-
-    preprocessors: {},
-
     reporters: ['dots'],
-
-    port: 9876,
-
-    colors: true,
 
     // config.LOG_DISABLE || config.LOG_ERROR || config.LOG_WARN || config.LOG_INFO || config.LOG_DEBUG
     logLevel: config.LOG_INFO,
@@ -55,6 +45,5 @@ module.exports = function(config) {
     },
 
     browsers: process.env.TRAVIS ? ['TRAVIS_CHROME'] : ['Chrome']
-
   });
 };

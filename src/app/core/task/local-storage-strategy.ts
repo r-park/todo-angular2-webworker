@@ -20,6 +20,7 @@ export class LocalStorageStrategy implements ITaskService {
 
   createTask(title: string): void {
     this.tasks.push(new Task(title));
+    this.save();
   }
 
   deleteTask(task: ITask): void {
