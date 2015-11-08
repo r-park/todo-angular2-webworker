@@ -31,7 +31,6 @@
     "minx": "~0.4.14",
     "reflect-metadata": "~0.1.2",
     "sinon": "~1.17.2",
-    "todo-server": "github:r-park/todo-server",
     "traceur": "~0.0.92",
     "typescript": "~1.6.2",
     "zone.js": "~0.5.8"

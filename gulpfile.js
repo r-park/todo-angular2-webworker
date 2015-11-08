@@ -7,7 +7,6 @@ var autoprefixer = require('autoprefixer'),
     postcss      = require('gulp-postcss'),
     sass         = require('gulp-sass'),
     sourcemaps   = require('gulp-sourcemaps'),
-    todoServer   = require('todo-server'),
     tslint       = require('gulp-tslint'),
     typescript   = require('gulp-typescript');
 
@@ -132,12 +131,6 @@ gulp.task('sass', function(){
 gulp.task('serve', function(done){
   browserSync.create()
     .init(config.browserSync, done);
-});
-
-
-gulp.task('serve.api', function(done){
-  todoServer.start();
-  done();
 });
 
 

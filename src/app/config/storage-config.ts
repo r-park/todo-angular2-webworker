@@ -1,6 +1,6 @@
 const baseUrl: string = 'http://localhost:8000';
 
-export const strategy: string = 'local'; // local | server
+export const strategy: string = 'server'; // local | server
 
 export class StorageConfig {
   localStorageKey: string = 'TODO-APP';
