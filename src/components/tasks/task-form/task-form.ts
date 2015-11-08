@@ -7,7 +7,7 @@ import {
   NgFormModel,
   View
 } from 'angular2/angular2';
-import { TaskService } from 'app/core/task/task-service';
+import { TaskService } from 'core/task/task-service';
 
 
 @Component({
@@ -20,8 +20,8 @@ import { TaskService } from 'app/core/task/task-service';
     NgControlName,
     NgFormModel
   ],
-  styleUrls: ['app/components/tasks/task-form/task-form.css'],
-  templateUrl: 'app/components/tasks/task-form/task-form.html'
+  styleUrls: ['components/tasks/task-form/task-form.css'],
+  templateUrl: 'components/tasks/task-form/task-form.html'
 })
 
 export class TaskForm {

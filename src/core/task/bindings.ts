@@ -1,5 +1,5 @@
 import { bind } from 'angular2/angular2';
-import { StorageConfig, strategy } from 'app/config/storage-config';
+import { StorageConfig, strategy } from 'config/storage-config';
 import { LocalStorageStrategy } from './local-storage-strategy';
 import { ServerStorageStrategy } from './server-storage-strategy';
 import { Task } from './task';

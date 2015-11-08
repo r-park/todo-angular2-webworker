@@ -1,7 +1,7 @@
 import { Component, NgFor, View } from 'angular2/angular2';
 import { RouterLink, RouteParams } from 'angular2/router';
-import { ITask } from 'app/core/task/task';
-import { TaskService } from 'app/core/task/task-service';
+import { ITask } from 'core/task/task';
+import { TaskService } from 'core/task/task-service';
 import { TaskItem } from '../task-item/task-item';
 import { TaskFilterPipe } from './task-filter-pipe';
 
@@ -19,8 +19,8 @@ import { TaskFilterPipe } from './task-filter-pipe';
   pipes: [
     TaskFilterPipe
   ],
-  styleUrls: ['app/components/tasks/task-list/task-list.css'],
-  templateUrl: 'app/components/tasks/task-list/task-list.html'
+  styleUrls: ['components/tasks/task-list/task-list.css'],
+  templateUrl: 'components/tasks/task-list/task-list.html'
 })
 
 export class TaskList {

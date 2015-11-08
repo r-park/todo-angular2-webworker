@@ -1,6 +1,6 @@
 import { Injectable } from 'angular2/angular2';
 import { Http, Response } from 'angular2/http';
-import { StorageConfig } from 'app/config/storage-config';
+import { StorageConfig } from 'config/storage-config';
 import { ITask, Task } from './task';
 import { ITaskService } from './task-service';
 

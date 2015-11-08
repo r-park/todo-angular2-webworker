@@ -11,8 +11,8 @@ import { Tasks } from '../tasks/tasks';
   directives: <any>[
     RouterOutlet
   ],
-  styleUrls: ['app/components/app/app.css'],
-  templateUrl: 'app/components/app/app.html'
+  styleUrls: ['components/app/app.css'],
+  templateUrl: 'components/app/app.html'
 })
 
 @RouteConfig([
