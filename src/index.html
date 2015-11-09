@@ -5,8 +5,9 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 
-  <title>Todo Angular 2</title>
+  <title>Todo Angular 2 WebWorker</title>
 
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="styles/styles.css">
 
@@ -18,20 +19,20 @@
 <body>
   <app></app>
 
-
   <script src="lib/system.js"></script>
   <script>
     System.config({
       baseURL: './',
-      defaultJSExtensions: true
+      defaultJSExtensions: true,
+      warnings: true
     });
   </script>
-  <script src="https://code.angularjs.org/2.0.0-alpha.39/angular2.dev.js"></script>
-  <script src="https://code.angularjs.org/2.0.0-alpha.39/http.dev.js"></script>
-  <script src="https://code.angularjs.org/2.0.0-alpha.39/router.dev.js"></script>
+  <script src="lib/es6-shim.min.js"></script>
+  <script src="lib/Reflect.js"></script>
+  <script src="lib/ui.dev.js"></script>
   <script>
-    System.import('app/main').catch(function(error){
-      console.log(error);
+    System.import('main').catch(function(error){
+      console.log('ERROR @ System.import :', error);
     });
   </script>
 </body>

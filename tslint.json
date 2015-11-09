@@ -12,7 +12,7 @@
       true,
       "check-space"
     ],
-    "curly": true,
+    "curly": false,
     "eofline": true,
     "forin": true,
     "indent": [
@@ -24,7 +24,7 @@
     "label-position": true,
     "label-undefined": true,
     "max-line-length": [
-      true,
+      false,
       140
     ],
     "member-ordering": [
@@ -50,7 +50,7 @@
     "no-duplicate-key": true,
     "no-shadowed-variable": true,
     "no-duplicate-variable": true,
-    "no-empty": true,
+    "no-empty": false,
     "no-eval": true,
     "no-internal-module": true,
     "no-require-imports": true,
@@ -85,7 +85,6 @@
       "call-signature",
       "parameter",
       "property-declaration",
-      "variable-declaration",
       "member-variable-declaration"
     ],
     "typedef-whitespace": [
@@ -97,7 +96,7 @@
       "variable-declaration": "nospace"
     }],
     "use-strict": [
-      true,
+      false,
       "check-module",
       "check-function"
     ],
