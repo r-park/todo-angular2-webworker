@@ -1,22 +1,9 @@
-@import
-"../../../../node_modules/minx/src/settings",
-"../../../../node_modules/minx/src/functions",
-"../../../../node_modules/minx/src/mixins";
-
 //===================================================================
 //  TASK-FORM
 //===================================================================
 
-.task-form {
-  margin: 40px 0 10px;
-
-  @include media-query(540) {
-    margin: 80px 0 20px;
-  }
-}
-
-
 .task-form__input {
+  margin: 40px 0 10px;
   outline: none;
   border: 0;
   border-bottom: 1px dotted #666;
@@ -31,6 +18,7 @@
   background: transparent;
 
   @include media-query(540) {
+    margin: 80px 0 20px;
     height: 61px;
     font-size: rem(32px);
   }

@@ -13,6 +13,7 @@ System.config({
   paths: {
     '*': 'target/*',
     'angular2/*': 'node_modules/angular2/*',
+    'immutable': 'node_modules/immutable/dist/immutable.js',
     '@reactivex/rxjs/*': 'node_modules/@reactivex/rxjs/*.js'
   }
 });

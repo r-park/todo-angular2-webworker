@@ -1,13 +1,3 @@
-import { bootstrap, provide } from 'angular2/angular2';
-import { HTTP_PROVIDERS } from 'angular2/http';
-import { HashLocationStrategy, LocationStrategy, ROUTER_PROVIDERS } from 'angular2/router';
-import { TASK_BINDINGS } from 'core/task/bindings';
-import { App } from 'components/app/app';
+import { bootstrap } from 'angular2/web_worker/ui';
 
-
-bootstrap(App, [
-  HTTP_PROVIDERS,
-  ROUTER_PROVIDERS,
-  provide(LocationStrategy, {useClass: HashLocationStrategy}),
-  TASK_BINDINGS
-]).catch((err: Error) => console.error(err));
+bootstrap('loader.js');

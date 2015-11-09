@@ -9,7 +9,13 @@
 "../../node_modules/minx/src/elements";
 
 @import
-"grid";
+"grid",
+"app/header",
+"app/main",
+"tasks/task-filters",
+"tasks/task-form",
+"tasks/task-item",
+"tasks/task-list";
 
 
 [hidden] {

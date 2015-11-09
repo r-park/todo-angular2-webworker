@@ -1,73 +1,121 @@
 import {
   Component,
-  ControlGroup,
-  DefaultValueAccessor,
-  FormBuilder,
-  NgClass,
-  NgControlName,
-  NgFormModel,
+  CORE_DIRECTIVES,
+  FORM_DIRECTIVES,
+  Input,
   View
-} from 'angular2/angular2';
+} from 'angular2/web_worker/worker';
+
 import { ITask } from 'core/task/task';
-import { TaskService } from 'core/task/task-service';
-import { FocusDirective } from 'directives/focus-directive';
+import { TaskActions } from 'core/task/task-actions';
 
 
 @Component({
-  properties: ['model'],
   selector: 'task-item'
 })
 
 @View({
   directives: [
-    DefaultValueAccessor,
-    FocusDirective,
-    NgClass,
-    NgControlName,
-    NgFormModel
+    CORE_DIRECTIVES,
+    FORM_DIRECTIVES
   ],
-  styleUrls: ['components/tasks/task-item/task-item.css'],
-  templateUrl: 'components/tasks/task-item/task-item.html'
+
+  template: `
+    <div [ng-class]="{'task-item--completed': model.completed, 'task-item--editing': editing}"
+      class="task-item"
+      tabindex="0">
+
+      <div class="cell">
+        <button *ng-if="!editing"
+          (click)="toggleStatus()"
+          aria-label="Mark task as completed"
+          class="task-item__button"
+          type="button">
+          <span class="icon material-icons" [ng-class]="{'icon--active': model.completed}">done</span>
+        </button>
+      </div>
+
+      <div class="cell">
+        <div *ng-if="!editing"
+          class="task-item__title"
+          tabindex="0">
+          {{ model.title }}
+        </div>
+
+        <form class="task-form" *ng-if="editing" (ng-submit)="saveTitle()" novalidate>
+          <input
+            (blur)="stopEditing()"
+            (keyup.escape)="stopEditing()"
+            ng-control="title"
+            [(ng-model)]="title"
+            autocomplete="off"
+            autofocus
+            class="task-item__input"
+            type="text">
+        </form>
+      </div>
+
+      <div class="cell">
+        <button *ng-if="editing"
+          (click)="stopEditing()"
+          aria-label="Cancel editing"
+          class="task-item__button"
+          type="button">
+          <span class="icon material-icons">&#xe14c;</span>
+        </button>
+        <button *ng-if="!editing"
+          (click)="editTitle()"
+          aria-label="Edit task title"
+          class="task-item__button"
+          type="button">
+          <span class="icon material-icons">edit</span>
+        </button>
+        <button *ng-if="!editing"
+          (click)="delete()"
+          aria-label="Delete task"
+          class="task-item__button"
+          type="button">
+          <span class="icon material-icons">delete</span>
+        </button>
+      </div>
+    </div>
+  `
 })
 
 export class TaskItem {
-  editing: boolean;
-  form: ControlGroup;
-  model: ITask;
-  private taskService: TaskService;
+  @Input() model: ITask;
 
-  constructor(formBuilder: FormBuilder, taskService: TaskService) {
-    this.editing = false;
-    this.form = formBuilder.group({title: ['']});
-    this.taskService = taskService;
-  }
+  editing: boolean = false;
+  title: string = '';
+
+  constructor(private taskActions: TaskActions) {}
 
   delete(): void {
-    this.taskService.deleteTask(this.model);
+    this.taskActions.deleteTask(this.model);
   }
 
-  edit(): void {
+  editTitle(): void {
     this.editing = true;
-    this.form.controls.title.updateValue(this.model.title);
+    this.title = this.model.title;
   }
 
-  cancelEdit(): void {
-    this.editing = false;
-  }
-
-  saveEdit(): void {
+  saveTitle(): void {
     if (this.editing) {
-      const value: string = this.form.controls.title.value.trim();
-      if (value.length && value !== this.model.title) {
-        this.model.title = value;
-        this.taskService.updateTask(this.model);
+      const title: string = this.title.trim();
+      if (title.length && title !== this.model.title) {
+        this.taskActions.updateTask(this.model, {title});
       }
-      this.editing = false;
+      this.stopEditing();
     }
   }
 
+  stopEditing(): void {
+    this.editing = false;
+  }
+
   toggleStatus(): void {
-    this.model.completed = !this.model.completed;
-    this.taskService.updateTask(this.model);
+    this.taskActions.updateTask(this.model, {
+      completed: !this.model.completed
+    });
   }
 }

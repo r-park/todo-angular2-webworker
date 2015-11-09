@@ -13,12 +13,11 @@ module.exports = function(config) {
       'node_modules/zone.js/dist/jasmine-patch.js',
       'node_modules/traceur/bin/traceur-runtime.js',
       'node_modules/es6-module-loader/dist/es6-module-loader.js',
-      'node_modules/sinon/pkg/sinon.js',
       'node_modules/systemjs/dist/system.js', // [ 2 ]
       'node_modules/reflect-metadata/Reflect.js',
       {pattern: 'node_modules/@reactivex/rxjs/**', included: false, watched: false}, // [ 3 ]
       {pattern: 'node_modules/angular2/**', included: false, watched: false}, // [ 3 ]
-      {pattern: 'test/lib/**', included: false, watched: false}, // [ 3 ]
+      {pattern: 'node_modules/immutable/**', included: false, watched: false}, // [ 3 ]
       {pattern: 'target/**', included: false, watched: false}, // [ 3 ]
       'karma.loader.js'
     ],

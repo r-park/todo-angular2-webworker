@@ -1,6 +1,5 @@
-import { Component, View } from 'angular2/angular2';
-import { RouteConfig, RouterOutlet } from 'angular2/router';
-import { Tasks } from '../tasks/tasks';
+import { Component, View } from 'angular2/web_worker/worker';
+import { Tasks } from 'components/tasks/tasks';
 
 
 @Component({
@@ -8,16 +7,24 @@ import { Tasks } from '../tasks/tasks';
 })
 
 @View({
-  directives: <any>[
-    RouterOutlet
+  directives: [
+    Tasks
   ],
-  styleUrls: ['components/app/app.css'],
-  templateUrl: 'components/app/app.html'
-})
 
-@RouteConfig([
-  { path: '/', redirectTo: '/tasks' },
-  { path: '/tasks', as: 'Tasks', component: Tasks }
-])
+  template: `
+    <header class="header">
+      <div class="g-row">
+        <div class="g-col">
+          <h1 class="header__title">Todo Angular2 WebWorker</h1>
+          <a class="header__link" href="https://github.com/r-park/todo-angular2-webworker"></a>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <tasks></tasks>
+    </main>
+  `
+})
 
 export class App {}
