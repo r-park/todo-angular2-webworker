@@ -5,7 +5,6 @@ var apiServer    = require('./server/server');
     exec         = require('child_process').exec,
     gulp         = require('gulp'),
     karma        = require('karma'),
-    nodemon      = require('gulp-nodemon'),
     postcss      = require('gulp-postcss'),
     sass         = require('gulp-sass'),
     sourcemaps   = require('gulp-sourcemaps'),
@@ -19,16 +18,11 @@ var apiServer    = require('./server/server');
 var paths = {
   lib: {
     src: [
-      'lib/ui.dev.js',
-      'lib/worker.dev.js',
-      'node_modules/es6-module-loader/dist/es6-module-loader.{js,js.map}',
+      'node_modules/angular2/bundles/web_worker/*',
       'node_modules/es6-shim/es6-shim.{map,min.js}',
       'node_modules/immutable/dist/immutable.min.js',
-      'node_modules/reflect-metadata/Reflect.js',
       'node_modules/socket.io-client/socket.io.js',
-      'node_modules/systemjs/dist/system.{js,js.map}',
-      'node_modules/zone.js/dist/long-stack-trace-zone.js',
-      'node_modules/zone.js/dist/zone-microtask.js'
+      'node_modules/systemjs/dist/system.{js,js.map}'
     ],
     target: 'target/lib'
   },

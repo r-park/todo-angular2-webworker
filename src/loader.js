@@ -14,9 +14,6 @@ System.config({
 });
 
 importScripts(
-  'lib/Reflect.js',
-  'lib/zone-microtask.js',
-  'lib/long-stack-trace-zone.js',
   'lib/worker.dev.js'
 );
 
