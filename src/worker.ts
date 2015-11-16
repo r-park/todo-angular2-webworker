@@ -1,6 +1,6 @@
 import { bootstrapWebWorker } from 'angular2/web_worker/worker';
-import { TASK_PROVIDERS } from 'core/task/providers';
-import { App } from 'components/app/app';
+import { TASK_PROVIDERS } from './core/task/providers';
+import { App } from './components/app/app';
 
 
 bootstrapWebWorker(App, [

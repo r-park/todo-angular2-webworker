@@ -4,7 +4,7 @@
 # Todo app with Angular2 WebWorker
 A simple Todo app example built with **Angular 2** and running in a **WebWorker**. The app persists data to a server via **websocket connection**, and caches task objects on the client using an **immutable list**.
 
-- Angular `2.0.0-alpha.45`
+- Angular `2.0.0-alpha.46`
   - WebWorker
 - Express
 - Gulp `4.0.0-alpha.1`

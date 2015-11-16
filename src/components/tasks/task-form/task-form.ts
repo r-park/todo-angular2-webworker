@@ -1,5 +1,5 @@
 import { Component, FORM_DIRECTIVES, View } from 'angular2/web_worker/worker';
-import { TaskActions } from 'core/task/task-actions';
+import { TaskActions } from '../../../core/task/task-actions';
 
 
 @Component({

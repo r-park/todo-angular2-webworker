@@ -1,5 +1,5 @@
 import { Component, View } from 'angular2/web_worker/worker';
-import { TaskStore} from 'core/task/task-store';
+import { TaskStore} from '../../core/task/task-store';
 import { TaskForm } from './task-form/task-form';
 import { TaskItem } from './task-item/task-item';
 import { TaskListFilterPipe } from './task-list-filter-pipe';

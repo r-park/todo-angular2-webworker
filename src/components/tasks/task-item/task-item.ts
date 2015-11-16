@@ -6,8 +6,8 @@ import {
   View
 } from 'angular2/web_worker/worker';
 
-import { ITask } from 'core/task/task';
-import { TaskActions } from 'core/task/task-actions';
+import { ITask } from '../../../core/task/task';
+import { TaskActions } from '../../../core/task/task-actions';
 
 
 @Component({

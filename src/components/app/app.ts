@@ -1,5 +1,5 @@
 import { Component, View } from 'angular2/web_worker/worker';
-import { Tasks } from 'components/tasks/tasks';
+import { Tasks } from '../tasks/tasks';
 
 
 @Component({

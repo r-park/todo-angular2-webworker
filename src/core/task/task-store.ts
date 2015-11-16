@@ -5,7 +5,7 @@ import { ITask } from './task';
 
 export class TaskStore {
   list: List<any>;
-  tasks: EventEmitter = new EventEmitter();
+  tasks: EventEmitter<any> = new EventEmitter();
 
   constructor(private socket: any, private zone: NgZone) {
     socket.on('created', this.created.bind(this));
