@@ -20,6 +20,10 @@ System.config({
           return mapping;
         }, {})
     }
+  },
+
+  paths: {
+    'immutable': '/base/node_modules/immutable/dist/immutable.js'
   }
 });
 
