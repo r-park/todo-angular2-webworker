@@ -20,10 +20,6 @@ export class TaskStore {
     socket.emit('loadTasks');
   }
 
-  subscribe(next: (list: List<any>) => void): any {
-    return this.tasks.subscribe(next);
-  }
-
   private emit(): void {
     this.zone.run(() => this.tasks.next(this.list));
   }
