@@ -1,6 +1,7 @@
 var apiServer    = require('./server/server');
     autoprefixer = require('autoprefixer'),
     browserSync  = require('browser-sync'),
+    changed      = require('gulp-changed'),
     del          = require('del'),
     exec         = require('child_process').exec,
     gulp         = require('gulp'),
@@ -154,6 +155,7 @@ var tsProject = typescript.createProject(config.ts.configFile);
 
 gulp.task('ts', function(){
   return gulp.src([paths.src.ts].concat(paths.typings.entries))
+    .pipe(changed(paths.target, {extension: '.js'}))
     .pipe(sourcemaps.init())
     .pipe(typescript(tsProject))
     .js
