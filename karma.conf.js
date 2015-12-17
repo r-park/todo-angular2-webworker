@@ -1,4 +1,4 @@
-module.exports = function(config) {
+module.exports = (config) => {
   config.set({
     frameworks: ['jasmine'],
 
@@ -29,10 +29,6 @@ module.exports = function(config) {
     reporters: ['dots'],
 
     logLevel: config.LOG_INFO,
-
-    // amount of time to wait for a message from browser before disconnecting
-    // default is 10000ms (10 seconds)
-    browserNoActivityTimeout: 300000, // 5 mins
 
     autoWatch: true,
 

@@ -1,4 +1,4 @@
-import { EventEmitter, NgZone } from 'angular2/web_worker/worker';
+import { EventEmitter, NgZone } from 'angular2/core';
 import { List } from 'immutable';
 import { ITask } from './task';
 
@@ -21,7 +21,7 @@ export class TaskStore {
   }
 
   private emit(): void {
-    this.zone.run(() => this.tasks.next(this.list));
+    this.zone.run(() => this.tasks.emit(this.list));
   }
 
   private created(task: ITask): void {

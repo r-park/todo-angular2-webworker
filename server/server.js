@@ -1,39 +1,42 @@
-var app = require('express')();
-var server = require('http').createServer(app);
-var io = require('socket.io')(server);
-var low = require('lowdb');
-var uuid = require('node-uuid');
-var chalk = require('chalk');
+'use strict';
+
+const app = require('express')();
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+const low = require('lowdb');
+const storage = require('lowdb/file-sync');
+const uuid = require('node-uuid');
+const chalk = require('chalk');
 
 
 //=====================================
 // Init database
 //-------------------------------------
-var db = low(__dirname + '/db.json');
+const db = low(__dirname + '/db.json', {storage});
 
 
 //=====================================
 // Socket Event Handlers
 //-------------------------------------
-io.on('connection', function(socket){
+io.on('connection', socket => {
 
-  socket.on('loadTasks', function(){
+  socket.on('loadTasks', () => {
     socket.emit('loaded', db('tasks'));
   });
 
-  socket.on('createTask', function(data){
+  socket.on('createTask', data => {
     data.id = uuid.v4();
-    var task = db('tasks').chain().push(data).last().value();
+    let task = db('tasks').chain().push(data).last().value();
     socket.emit('created', task);
   });
 
-  socket.on('deleteTask', function(task){
+  socket.on('deleteTask', task => {
     db('tasks').remove({id: task.id});
     socket.emit('deleted', task);
   });
 
-  socket.on('updateTask', function(task, changes){
-    var updatedTask = db('tasks').chain().find({id: task.id}).assign(changes).value();
+  socket.on('updateTask', (task, changes) => {
+    let updatedTask = db('tasks').chain().find({id: task.id}).assign(changes).value();
     socket.emit('updated', updatedTask);
   });
 
@@ -43,12 +46,8 @@ io.on('connection', function(socket){
 //=====================================
 // Start Server
 //-------------------------------------
-exports.start = function(callback) {
-  server.listen(3000, 'localhost', function(){
-    console.log(chalk.gray(' --------------------------------------'));
-    console.log('       Socket.io: ' + chalk.magenta('http://localhost:3000'));
-    console.log(chalk.gray(' --------------------------------------'));
-
-    callback();
-  });
-};
+server.listen(3002, 'localhost', () => {
+  console.log(chalk.gray(' --------------------------------------'));
+  console.log('       Socket.io: ' + chalk.magenta('http://localhost:3002'));
+  console.log(chalk.gray(' --------------------------------------'));
+});

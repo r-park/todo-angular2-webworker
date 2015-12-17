@@ -4,7 +4,6 @@ export interface ITask {
   title: string;
 }
 
-
 export class Task implements ITask {
   completed: boolean = false;
   title: string;

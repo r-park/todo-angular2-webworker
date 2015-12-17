@@ -1,5 +1,5 @@
-import { AsyncPipe, Component, CORE_DIRECTIVES, View } from 'angular2/web_worker/worker';
-import { TaskStore} from '../../core/task/task-store';
+import { Component, View } from 'angular2/core';
+import { TaskStore} from '../../modules/task/task-store';
 import { TaskForm } from './task-form/task-form';
 import { TaskItem } from './task-item/task-item';
 import { TaskListFilterPipe } from './task-list-filter-pipe';
@@ -11,13 +11,11 @@ import { TaskListFilterPipe } from './task-list-filter-pipe';
 
 @View({
   directives: [
-    CORE_DIRECTIVES,
     TaskForm,
     TaskItem
   ],
 
   pipes: [
-    AsyncPipe,
     TaskListFilterPipe
   ],
 
@@ -37,7 +35,7 @@ import { TaskListFilterPipe } from './task-list-filter-pipe';
 
       <div class="g-col">
         <div class="task-list">
-          <task-item [model]="task" *ng-for="#task of taskStore.tasks | async | filterTasks:filterType"></task-item>
+          <task-item [model]="task" *ngFor="#task of taskStore.tasks | async | filterTasks:filterType"></task-item>
         </div>
       </div>
     </div>
