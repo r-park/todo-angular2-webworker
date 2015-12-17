@@ -1,8 +1,8 @@
 import { Component, Input, View } from 'angular2/core';
 import { FORM_DIRECTIVES } from 'angular2/common';
 
-import { ITask } from '../../../core/task/task';
-import { TaskActions } from '../../../core/task/task-actions';
+import { ITask } from '../../../modules/task/task';
+import { TaskActions } from '../../../modules/task/task-actions';
 
 
 @Component({

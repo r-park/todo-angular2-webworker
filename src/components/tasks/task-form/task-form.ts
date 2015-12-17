@@ -1,6 +1,6 @@
 import { Component, View } from 'angular2/core';
 import { FORM_DIRECTIVES } from 'angular2/common';
-import { TaskActions } from '../../../core/task/task-actions';
+import { TaskActions } from '../../../modules/task/task-actions';
 
 
 @Component({
