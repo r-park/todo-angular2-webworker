@@ -38,13 +38,7 @@ var paths = {
 
   target: 'target',
 
-  typings: {
-    entries: [
-      'typings/tsd/tsd.d.ts',
-      'typings/custom/custom.d.ts'
-    ],
-    watch: 'typings/**/*.ts'
-  }
+  typings: 'typings/**/*.ts'
 };
 
 
@@ -155,7 +149,7 @@ gulp.task('serve.api', function(done){
 var tsProject = typescript.createProject(config.ts.configFile);
 
 gulp.task('ts', function(){
-  return gulp.src([paths.src.ts].concat(paths.typings.entries))
+  return gulp.src([paths.src.ts, paths.typings])
     .pipe(changed(paths.target, {extension: '.js'}))
     .pipe(sourcemaps.init())
     .pipe(typescript(tsProject))
@@ -189,7 +183,7 @@ gulp.task('default', gulp.series(
     gulp.watch(paths.src.html, gulp.task('copy.html'));
     gulp.watch(paths.src.js, gulp.task('copy.js'));
     gulp.watch(paths.src.sass, gulp.task('sass'));
-    gulp.watch([paths.src.ts, paths.typings.watch], gulp.task('ts'));
+    gulp.watch([paths.src.ts, paths.typings], gulp.task('ts'));
   }
 ));
 
