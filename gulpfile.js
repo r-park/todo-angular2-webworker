@@ -1,22 +1,24 @@
-var apiServer    = require('./server/server');
-    autoprefixer = require('autoprefixer'),
-    browserSync  = require('browser-sync'),
-    changed      = require('gulp-changed'),
-    del          = require('del'),
-    exec         = require('child_process').exec,
-    gulp         = require('gulp'),
-    karma        = require('karma'),
-    postcss      = require('gulp-postcss'),
-    sass         = require('gulp-sass'),
-    sourcemaps   = require('gulp-sourcemaps'),
-    tslint       = require('gulp-tslint'),
-    typescript   = require('gulp-typescript');
+'use strict';
+
+const apiServer    = require('./server/server');
+const autoprefixer = require('autoprefixer');
+const browserSync  = require('browser-sync');
+const changed      = require('gulp-changed');
+const del          = require('del');
+const exec         = require('child_process').exec;
+const gulp         = require('gulp');
+const karma        = require('karma');
+const postcss      = require('gulp-postcss');
+const sass         = require('gulp-sass');
+const sourcemaps   = require('gulp-sourcemaps');
+const tslint       = require('gulp-tslint');
+const typescript   = require('gulp-typescript');
 
 
 //=========================================================
 //  PATHS
 //---------------------------------------------------------
-var paths = {
+const paths = {
   lib: {
     src: [
       'node_modules/angular2/bundles/angular2-polyfills.{js,min.js}',
@@ -45,7 +47,7 @@ var paths = {
 //=========================================================
 //  CONFIG
 //---------------------------------------------------------
-var config = {
+const config = {
   autoprefixer: {
     browsers: ['last 3 versions', 'Firefox ESR', 'Opera 12.1']
   },
@@ -92,30 +94,28 @@ var config = {
 //=========================================================
 //  TASKS
 //---------------------------------------------------------
-gulp.task('clean.target', function(){
-  return del(paths.target);
-});
+gulp.task('clean.target', () => del(paths.target));
 
 
-gulp.task('copy.html', function(){
+gulp.task('copy.html', () => {
   return gulp.src(paths.src.html)
     .pipe(gulp.dest(paths.target));
 });
 
 
-gulp.task('copy.js', function(){
+gulp.task('copy.js', () => {
   return gulp.src(paths.src.js)
     .pipe(gulp.dest(paths.target));
 });
 
 
-gulp.task('copy.lib', function(){
+gulp.task('copy.lib', () => {
   return gulp.src(paths.lib.src)
     .pipe(gulp.dest(paths.lib.target));
 });
 
 
-gulp.task('lint', function(){
+gulp.task('lint', () => {
   return gulp.src(paths.src.ts)
     .pipe(tslint())
     .pipe(tslint.report(
@@ -125,7 +125,7 @@ gulp.task('lint', function(){
 });
 
 
-gulp.task('sass', function(){
+gulp.task('sass', () => {
   return gulp.src(paths.src.sass)
     .pipe(sass(config.sass))
     .pipe(postcss([
@@ -135,20 +135,20 @@ gulp.task('sass', function(){
 });
 
 
-gulp.task('serve', function(done){
+gulp.task('serve', done => {
   browserSync.create()
     .init(config.browserSync, done);
 });
 
 
-gulp.task('serve.api', function(done){
+gulp.task('serve.api', done => {
   apiServer.start(done);
 });
 
 
-var tsProject = typescript.createProject(config.ts.configFile);
+const tsProject = typescript.createProject(config.ts.configFile);
 
-gulp.task('ts', function(){
+gulp.task('ts', function ts(){
   return gulp.src([paths.src.ts, paths.typings])
     .pipe(changed(paths.target, {extension: '.js'}))
     .pipe(sourcemaps.init())
@@ -192,7 +192,7 @@ gulp.task('default', gulp.series(
 //  TEST
 //---------------------------
 function karmaServer(options, done) {
-  var server = new karma.Server(options, function(error){
+  let server = new karma.Server(options, error => {
     if (error) process.exit(error);
     done();
   });
@@ -200,20 +200,20 @@ function karmaServer(options, done) {
 }
 
 
-gulp.task('karma', function(done){
+gulp.task('karma', done => {
   config.karma.singleRun = true;
   karmaServer(config.karma, done);
 });
 
 
-gulp.task('karma.watch', function(done){
+gulp.task('karma.watch', done => {
   karmaServer(config.karma, done);
 });
 
 
-gulp.task('karma.run', function(done){
-  var cmd = process.platform === 'win32' ? 'node_modules\\.bin\\karma run karma.conf.js' : 'node node_modules/.bin/karma run karma.conf.js';
-  exec(cmd, function(error, stdout){
+gulp.task('karma.run', done => {
+  let cmd = process.platform === 'win32' ? 'node_modules\\.bin\\karma run karma.conf.js' : 'node node_modules/.bin/karma run karma.conf.js';
+  exec(cmd, (error, stdout) => {
     done();
   });
 });
@@ -224,7 +224,5 @@ gulp.task('test', gulp.series('lint', 'build' /*, 'karma'*/));
 
 gulp.task('test.watch', gulp.parallel(
   gulp.series('lint', 'build', 'karma.watch'),
-  function(){
-    gulp.watch(paths.src.ts, gulp.series('ts', 'karma.run'));
-  }
+  () => gulp.watch(paths.src.ts, gulp.series('ts', 'karma.run'))
 ));
