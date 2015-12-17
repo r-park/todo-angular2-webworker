@@ -49,7 +49,7 @@ const paths = {
 //---------------------------------------------------------
 const config = {
   autoprefixer: {
-    browsers: ['last 3 versions', 'Firefox ESR', 'Opera 12.1']
+    browsers: ['last 3 versions', 'Firefox ESR']
   },
 
   browserSync: {
