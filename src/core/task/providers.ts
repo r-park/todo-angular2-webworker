@@ -1,4 +1,4 @@
-import { NgZone, provide } from 'angular2/web_worker/worker';
+import { NgZone, provide } from 'angular2/core';
 import * as io from 'socket.io-client';
 import { TaskActions } from './task-actions';
 import { TaskStore } from './task-store';

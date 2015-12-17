@@ -14,6 +14,7 @@ System.config({
 });
 
 importScripts(
+  'lib/angular2-polyfills.js',
   'lib/worker.dev.js'
 );
 

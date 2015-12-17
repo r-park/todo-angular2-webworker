@@ -19,6 +19,7 @@ var apiServer    = require('./server/server');
 var paths = {
   lib: {
     src: [
+      'node_modules/angular2/bundles/angular2-polyfills.{js,min.js}',
       'node_modules/angular2/bundles/web_worker/*',
       'node_modules/es6-shim/es6-shim.{map,min.js}',
       'node_modules/immutable/dist/immutable.min.js',

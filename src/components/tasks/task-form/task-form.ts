@@ -1,4 +1,5 @@
-import { Component, FORM_DIRECTIVES, View } from 'angular2/web_worker/worker';
+import { Component, View } from 'angular2/core';
+import { FORM_DIRECTIVES } from 'angular2/common';
 import { TaskActions } from '../../../core/task/task-actions';
 
 
@@ -15,7 +16,7 @@ import { TaskActions } from '../../../core/task/task-actions';
     <input
       (keyup.enter)="submit()"
       (keyup.escape)="clear()"
-      [(ng-model)]="title"
+      [(ngModel)]="title"
       autocomplete="off"
       autofocus
       class="task-form__input"
