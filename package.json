@@ -10,6 +10,9 @@
   },
   "license": "MIT",
   "private": true,
+  "engines": {
+    "node": ">=4.2"
+  },
   "scripts": {
     "test": "./node_modules/.bin/gulp test"
   },
