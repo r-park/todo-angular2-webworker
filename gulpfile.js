@@ -1,6 +1,5 @@
 'use strict';
 
-const apiServer    = require('./server/server');
 const autoprefixer = require('autoprefixer');
 const browserSync  = require('browser-sync');
 const changed      = require('gulp-changed');
@@ -8,6 +7,7 @@ const del          = require('del');
 const exec         = require('child_process').exec;
 const gulp         = require('gulp');
 const karma        = require('karma');
+const nodemon       = require('gulp-nodemon');
 const postcss      = require('gulp-postcss');
 const sass         = require('gulp-sass');
 const sourcemaps   = require('gulp-sourcemaps');
@@ -56,7 +56,7 @@ const config = {
     files: [paths.target + '/**/*'],
     notify: false,
     open: false,
-    port: 7000,
+    port: 3000,
     reloadDelay: 500,
     server: {
       baseDir: paths.target
@@ -68,7 +68,13 @@ const config = {
   },
 
   nodemon: {
-    script: 'server.js'
+    env: {
+      NODE_ENV: 'development'
+    },
+    script: './server/server.js',
+    watch: [
+      'server/**/*.js'
+    ]
   },
 
   sass: {
@@ -142,7 +148,7 @@ gulp.task('serve', done => {
 
 
 gulp.task('serve.api', done => {
-  apiServer.start(done);
+  nodemon(config.nodemon).on('start', done);
 });
 
 

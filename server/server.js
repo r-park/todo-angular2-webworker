@@ -4,6 +4,7 @@ const app = require('express')();
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 const low = require('lowdb');
+const storage = require('lowdb/file-sync');
 const uuid = require('node-uuid');
 const chalk = require('chalk');
 
@@ -11,7 +12,7 @@ const chalk = require('chalk');
 //=====================================
 // Init database
 //-------------------------------------
-const db = low(__dirname + '/db.json');
+const db = low(__dirname + '/db.json', {storage});
 
 
 //=====================================
@@ -45,12 +46,8 @@ io.on('connection', socket => {
 //=====================================
 // Start Server
 //-------------------------------------
-exports.start = (callback) => {
-  server.listen(3000, 'localhost', () => {
-    console.log(chalk.gray(' --------------------------------------'));
-    console.log('       Socket.io: ' + chalk.magenta('http://localhost:3000'));
-    console.log(chalk.gray(' --------------------------------------'));
-
-    callback();
-  });
-};
+server.listen(3002, 'localhost', () => {
+  console.log(chalk.gray(' --------------------------------------'));
+  console.log('       Socket.io: ' + chalk.magenta('http://localhost:3002'));
+  console.log(chalk.gray(' --------------------------------------'));
+});
